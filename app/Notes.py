@@ -9,7 +9,7 @@ class Notes:
     def remove_note(self):
         pass
 
-    def find_note(self):
+    def show_note(self):
         pass
 
     def show_all(self):

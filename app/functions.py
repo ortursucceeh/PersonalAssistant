@@ -16,10 +16,10 @@ handler = {
     'change_email': ContactRecord.change_email,
     'remove_email': ContactRecord.remove_email,
     'add_birthday': ContactRecord.add_birthday,
-    'add_note': Notes.add_contact,
-    'change_note': Notes.change_contact,
-    'remove_note': Notes.remove_contact,
-    'show_note': Notes.show_contact,
+    'add_note': Notes.add_note,
+    'change_note': Notes.change_note,
+    'remove_note': Notes.remove_note,
+    'show_note': Notes.show_note,
     'show_all_notes': Notes.show_all,
     'sort_notes': Notes.sort_notes,
     'show_notes_by': Notes.show_notes_by,
@@ -32,13 +32,4 @@ handler = {
     'change_notedata': NoteRecord.change_notedata,
     'remove_notedata': NoteRecord.remove_notedata
 
-}
-
-notes_handler = {
-
-
-}
-
-main_handler = {
-    "commands": list(book_handler).values() + list
 }
