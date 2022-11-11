@@ -34,14 +34,6 @@ class Book(UserDict):
     def show_all(self):
         pass
 
-
-class ContactRecord:
-
-    def __init__(self, name, phone=None, email=None, birthday=None):
-        self.name = Name(name)
-        self.birthday = Birthday(birthday) if birthday else None
-        self.phones = [Phone(phone)] if phone else []
-
     # name handling
     def change_name(self):
         pass
@@ -69,6 +61,14 @@ class ContactRecord:
 # birthday handling
     def add_birthday(self):
         pass
+
+
+class ContactRecord:
+
+    def __init__(self, name, phone=None, email=None, birthday=None):
+        self.name = Name(name)
+        self.birthday = Birthday(birthday) if birthday else None
+        self.phones = [Phone(phone)] if phone else []
 
 
 class ContactField:
@@ -119,6 +119,3 @@ class Email(ContactField):
 
 class Birthday(ContactField):
     pass
-
-
-contactBook = ()

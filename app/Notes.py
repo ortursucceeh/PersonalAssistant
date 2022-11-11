@@ -1,4 +1,7 @@
-class Notes:
+from collections import UserDict
+
+
+class Notes(UserDict):
 
     def add_note(self):
         pass
@@ -21,10 +24,7 @@ class Notes:
     def show_notes_by(self):
         pass
 
-
-class NoteRecord:
-
-    # title handling
+        # title handling
     def change_title(self):
         pass
 
@@ -50,6 +50,13 @@ class NoteRecord:
 
     def remove_notedata(self):
         pass
+
+
+class NoteRecord:
+    def __init__(self, title, keywords=None, note=None):
+        self.title = title
+        self.keywords = keywords
+        self.note = note
 
 
 class NoteField:
