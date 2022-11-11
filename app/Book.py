@@ -1,26 +1,17 @@
 from collections import UserDict
+from input_checker import NameInput
 
 
 class Book(UserDict):
 
     # work with contact
     def add_contact(self):
-        name = Name(input('Enter name: '))
-        phone = Phone(input('Enter phone: '))
-        email = Email(input('Enter email: '))
-        birthday = Birthday(input('Enter birthday: '))
-        try:
-            record = ContactRecord(name, phone, email, birthday)
-            self.data[name.value.lower()] = record
-            return f'Contact {name.value().capitalize()} was added to contacts!'
-        except:
-            print("Try again?")
-            vote = input(
-                "Enter 'y' - to try again, 'n' - to choose another command\nYour choice -  ")
-            if vote == 'y':
-                self.add_contact()
-            else:
-                return "another"
+        name = Name(NameInput('name'))
+        phones = None
+        email = None
+        record = ContactRecord(name, phones, email)
+        self.data[str(name)] = record
+        return f'Contact {str(name)}'
 
     def change_contact(self):
         pass
@@ -56,19 +47,36 @@ class Book(UserDict):
         pass
 
     def remove_email(self):
-        pass
+        name = self.NameInput()
+        self.data[name].email = None
 
 # birthday handling
     def add_birthday(self):
         pass
 
+    def show_birthdays_after(self):
+        pass
+
+# address handling
+
+    def add_address(self):
+        pass
+
+    def change_address(self):
+        pass
+
+    def remove_address(self):
+        pass
+
 
 class ContactRecord:
 
-    def __init__(self, name, phone=None, email=None, birthday=None):
+    def __init__(self, name, phone=None, email=None, birthday=None, address=None):
         self.name = Name(name)
         self.birthday = Birthday(birthday) if birthday else None
         self.phones = [Phone(phone)] if phone else []
+        self.email = Email(email) if email else None
+        self.address = Address(address) if address else None
 
 
 class ContactField:
@@ -81,32 +89,13 @@ class ContactField:
 
     @value.setter
     def value(self, new_value):
-        if isinstance(self, Name):
-            self._check_name(new_value)
-        elif isinstance(self, Phone):
-            self._check_phone(new_value)
-        elif isinstance(self, Birthday):
-            self._check_birthday(new_value)
-        elif isinstance(self, Email):
-            self._check_email(new_value)
-
         self.__value = new_value
 
-    def _check_name(self, value):
-        pass
 
-    def _check_phone(self, value):
-        pass
-
-    def _check_email(self, value):
-        pass
-
-    def _check_birthday(self, value):
-        pass
-
-
+# Прописати __str__
 class Name(ContactField):
-    pass
+    def __str__(self):
+        return self.value
 
 
 class Phone(ContactField):
@@ -118,4 +107,8 @@ class Email(ContactField):
 
 
 class Birthday(ContactField):
+    pass
+
+
+class Address(ContactField):
     pass

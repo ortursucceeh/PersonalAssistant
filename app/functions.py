@@ -1,7 +1,7 @@
 import difflib
 import os
 import pickle
-from Book import Book, ContactRecord
+from Book import Book, ContactRecord, Name
 from Notes import Notes, NoteRecord
 
 contacts = Book()
@@ -21,6 +21,10 @@ handler = {
     'change_email': contacts.change_email,
     'remove_email': contacts.remove_email,
     'add_birthday': contacts.add_birthday,
+    'show_birthdays_after': contacts.show_birthdays_after,
+    'add_address': contacts.add_address,
+    'change_address': contacts.change_address,
+    'remove_address': contacts.remove_address,
     'add_note': notes.add_note,
     'change_note': notes.change_note,
     'remove_note': notes.remove_note,
