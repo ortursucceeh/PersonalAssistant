@@ -45,42 +45,20 @@ handler = {
 
 
 def user_mistake(command):
-    pos = difflib.get_close_matches(command, handler.keys(), n=3, cutoff=0.55)
-    if pos:
-        ph1 = "Looks like you make mistake."
-        ph2 = "Type 'A'"
-        ph3 = "Type 'B'"
-        ph4 = "Type 'C'"
-        ph5 = "if you mean"
-        if len(pos) == 3:
-            new_input = input(
-                f"{ph1}\n{ph2} {ph5} '{pos[0]}'.\n{ph3} {ph5} '{pos[1]}'.\n{ph4} {ph5} '{pos[2]}'.\nEnter command:").lower()
-            if new_input == "a":
-                return pos[0]
-            elif new_input == "b":
-                return pos[1]
-            elif new_input == "c":
-                return pos[2]
-            else:
-                return
-        if len(pos) == 2:
-            new_input = input(
-                f"{ph1}\n{ph2} {ph5} '{pos[0]}'.\n{ph3} {ph5} '{pos[1]}'.\nEnter command:").lower().strip()
-            if new_input == "a":
-                return pos[0]
-            elif new_input == "b":
-                return pos[1]
-            else:
-                return
-        if len(pos) == 1:
-            new_input = input(
-                f"{ph1}\n{ph2} {ph5} '{pos[0]}'.\nEnter command:").lower().strip()
-            if new_input == "a":
-                return pos[0]
-            else:
-                return
-    else:
-        return
+    posssibilty = difflib.get_close_matches(command, handler.keys(), n=3, cutoff=0.55)
+    if posssibilty:
+        letters=['A','B','C']
+        i=0
+        print("Looks like you make a mistake.")
+        while i<len(posssibilty):
+            print(f"Type '{letters[i]}' if you mean '{posssibilty[i]}'")
+            i+=1
+        new_user_input=input("Enter command:")
+        input_update=new_user_input.capitalize().strip()
+        if input_update in letters:
+            return print(posssibilty[letters.index(input_update)])
+        else:
+            return
 
 
 def exit_func():
