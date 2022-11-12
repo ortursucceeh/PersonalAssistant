@@ -48,15 +48,13 @@ def user_mistake(command):
     posssibilty = difflib.get_close_matches(command, handler.keys(), n=3, cutoff=0.55)
     if posssibilty:
         letters=['A','B','C']
-        i=0
         print("Looks like you make a mistake.")
-        while i<len(posssibilty):
+        for i in range(len(posssibilty)):
             print(f"Type '{letters[i]}' if you mean '{posssibilty[i]}'")
-            i+=1
-        new_user_input=input("Enter command:")
+        new_user_input=input("Enter Letter:")
         input_update=new_user_input.capitalize().strip()
         if input_update in letters:
-            return print(posssibilty[letters.index(input_update)])
+            return posssibilty[letters.index(input_update)]
         else:
             return
 
