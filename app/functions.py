@@ -3,7 +3,7 @@ import os
 import pickle
 from Book import Book, ContactRecord, Name
 from Notes import Notes, NoteRecord
-
+from prettytable import PrettyTable
 contacts = Book()
 notes = Notes()
 
@@ -57,7 +57,36 @@ def user_mistake(command):
             return posssibilty[letters.index(input_update)]
         else:
             return
-
+def start_func():
+    w_t1="Welcome dear User. "
+    w_t2="Our small application works with your contact list and notes. " 
+    w_t3="Type one of below self-explanatory command to start work with it."
+    table1 = PrettyTable()
+    table1.field_names=[w_t1+w_t2+w_t3]
+    table1.align = "r"
+    keysList = list(handler.keys())
+    keysList+=exit_words+hello_words
+    table=PrettyTable()
+    field_names = ["1","2","3","4","5","6"]
+    y=0
+    for i in field_names:
+        table.add_column(i,keysList[y:y+6])
+        y+=6
+    print(table1)
+    print(table)
+    if os.path.exists("contact_book.pickle") and \
+            os.path.getsize("contact_book.pickle")!=0:
+        with open("contact_book.pickle","rb") as file:
+            contacts = pickle.load(file)
+    else:
+        contacts = Book()
+    if os.path.exists("notes.pickle") and \
+            os.path.getsize("notes.pickle")!=0:
+        with open("notes.pickle","rb") as file:
+            contacts = pickle.load(file)
+    else:
+        notes = Notes()
+    return contacts,notes
 
 def exit_func():
     print('exit')
