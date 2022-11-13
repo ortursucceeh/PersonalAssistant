@@ -5,8 +5,9 @@
 </p>
 
 <p align="center">
-   <img src="" alt="Python Version">
-   <img src="" alt="License">
+   <img src="https://img.shields.io/badge/Language-Python-brightgreen">
+   <img src="https://img.shields.io/badge/Version-3.6.6-blue">
+   <img src="https://img.shields.io/badge/License-MIT-yellow">
 </p>
 
 ## About
