@@ -62,6 +62,7 @@ class Book(UserDict):
             new_name = Name(nameInput('new name'))
             old_record = self.data[str(name)]
             self.data[str(new_name)] = old_record
+            old_record.name = new_name
             del self.data[str(name)]
             return f"Contact {str(name)} name was changed to new '{new_name}'!"
         return f'Contact {str(name)} doesn`t exist in contacts'
