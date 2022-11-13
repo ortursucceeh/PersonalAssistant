@@ -1,9 +1,11 @@
 import difflib
 import os
 import pickle
-from Book import Book, ContactRecord, Name
-from Notes import Notes, NoteRecord
+from Book import Book
+from Notes import Notes
 from prettytable import PrettyTable
+
+
 contacts = Book()
 notes = Notes()
 
