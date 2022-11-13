@@ -46,17 +46,14 @@ handler = {
 def user_mistake(command):
     posssibilty = difflib.get_close_matches(command, handler.keys(), n=3, cutoff=0.55)
     if posssibilty:
-        letters=['A','B','C']
-        i=0
+        letters=['1','2','3']
         print("Looks like you make a mistake.")
-        while i<len(posssibilty):
+        for i in range(len(posssibilty)):
             print(f"Type '{letters[i]}' if you mean '{posssibilty[i]}'")
-            i+=1
-        new_user_input=input("Enter command:")
-        input_update=new_user_input.capitalize().strip()
-        while input_update not in letters:
-            input_update=input("Enter One of the Letters Above to Choose Function: ").capitalize().strip()
-        return posssibilty[letters.index(input_update)]
+        new_user_input=input("Enter Digit: ").capitalize().strip()
+        while new_user_input not in letters:
+            new_user_input=input("Enter One of the Digits Above to Choose Function: ").capitalize().strip()
+        return posssibilty[letters.index(new_user_input)]
 
 def start_func():
    print('start')
