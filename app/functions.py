@@ -13,7 +13,7 @@ handler = {
     'remove_contact': contacts.remove_contact,
     'show_contact': contacts.show_contact,
     'show_all_contacts': contacts.show_all,
-    # 'change_name': contacts.change_name,
+    'change_name': contacts.change_name,
     'add_phone': contacts.add_phone,
     'change_phone': contacts.change_phone,
     'remove_phone': contacts.remove_phone,
