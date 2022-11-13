@@ -1,7 +1,5 @@
 from functions import handler, user_mistake, exit_func, hello_func
 from constants import hello_words, exit_words
-from Book import Book
-from Notes import Notes
 
 
 def main():

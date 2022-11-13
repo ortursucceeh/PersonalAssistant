@@ -4,6 +4,7 @@ import pickle
 from Book import Book
 from Notes import Notes
 
+
 contacts = Book()
 notes = Notes()
 
@@ -30,13 +31,12 @@ handler = {
     'remove_note': notes.remove_note,
     'show_note': notes.show_note,
     'show_all_notes': notes.show_all,
-    'sort_notes': notes.sort_notes,
-    'show_notes_by': notes.show_notes_by,
+    'sort_notes_by': notes.sort_notes_by,
+    'show_notes_with_tag': notes.show_notes_with_tag,
     'change_title': notes.change_title,
-    'add_keyword': notes.add_keyword,
-    'change_keyword': notes.change_keyword,
-    'remove_keyword': notes.remove_keyword,
-    'remove_all_keywords': notes.remove_all_keywords,
+    'add_keyword': notes.add_keywords,
+    'change_keyword': notes.change_keywords,
+    'remove_keyword': notes.remove_keywords,
     'add_notedata': notes.add_notedata,
     'change_notedata': notes.change_notedata,
     'remove_notedata': notes.remove_notedata
