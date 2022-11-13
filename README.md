@@ -44,6 +44,7 @@ Command Line Bot
 
 ## Developers
 
-- [ortursucceeh](https://github.com/ortursucceeh)
+- [ortursucceeh](https://github.com/ortursucceeh) [Yuriy Krasyuk](https://github.com/YuriyKrasyuk)
+- [Serhii-Kravchenko-2022](https://github.com/Serhii-Kravchenko-2022) [SergiiOshmarin](https://github.com/SergiiOshmarin)
 
 ## License
