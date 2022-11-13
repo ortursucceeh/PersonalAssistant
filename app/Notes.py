@@ -178,7 +178,7 @@ class Title(NoteField):
 
 class Keywords(NoteField):
     def __str__(self):
-        return ', '.join(self.value)
+        return ', '.join(self.value) if self.value else '-'
 
     def __add__(self, other: list):
         return __class__(self.value + other)
@@ -189,4 +189,4 @@ class Keywords(NoteField):
 
 class Notedata(NoteField):
     def __str__(self):
-        return self.value
+        return self.value if self.value else '-'

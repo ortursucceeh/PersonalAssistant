@@ -1,5 +1,7 @@
 from collections import UserDict
-from input_checker import name_input, phone_input   #, email_input, adsress_input, birthday_input
+# , email_input, adsress_input, birthday_input
+from input_checker import name_input, phone_input
+from console_output import show_in_console
 
 
 class Book(UserDict):
@@ -13,42 +15,47 @@ class Book(UserDict):
         # email = Email(email_input('email'))
         # address = Address(adsress_input('address'))
         # birthday = Birthday(birthday_input('birthday'))
-        record = ContactRecord(name=name, phone=phones)   #, email=email, birthday=birthday, address=address)
+        # , email=email, birthday=birthday, address=address)
+        record = ContactRecord(name=name, phone=phones)
         self.data[str(name)] = record
         return f'Contact {str(name)} was added to contacts'
 
     def change_contact(self):
         name = Name(name_input('name'))
         if str(name) not in self.data:
-            return f'Contact {str(name)} not exist in contacts'
+            return f'Contact {str(name)} doesn`t exist in contacts'
         phones = Phone(phone_input('new phone (max 3) separated by space'))
         # email = Email(email_input('new email'))
         # address = Address(adsress_input('new address'))
         # birthday = Birthday(birtgday_input('new birthday'))
-        record = ContactRecord(name=name, phone=phones)   #, email=email, birthday=birthday, address=address)
+        # , email=email, birthday=birthday, address=address)
+        record = ContactRecord(name=name, phone=phones)
         self.data[str(name)] = record
         return f'Contact {str(name)} was changed in contacts'
 
     def remove_contact(self):
         name = Name(name_input('name'))
         if str(name) not in self.data:
-            return f'Contact {str(name)} not exist in contacts'
+            return f'Contact {str(name)} doesn`t exist in contacts'
         self.data.pop(str(name))
-        return f'Contact {str(name)} was remove from contacts!'
+        return f'Contact {str(name)} was removed from contacts!'
 
     def show_contact(self):
         name = Name(name_input('name'))
         if str(name) not in self.data:
-            return f'Contact {str(name)} not exist in contacts'
+            return f'Contact {str(name)} doesn`t exist in contacts'
         record = self.data[str(name)]
-        return f'Name: {name}\n' \
-               f'Phone(s): {record.phones if record.phones.value else "-"}\n' \
-               f'Email: {record.email if record.email else "-"}\n' \
-               f'Birthday: {record.birthday if record.birthday else "-"}\n' \
-               f'Address: {record.address if record.address else "-"}'
+        data = [[str(record.name), str(record.phones),
+                str(record.email), str(record.birthday), str(record.address)]]
+        headers = ['Name', 'Phones', 'Email', 'Birthday', 'Address']
+        show_in_console(data, headers, 'rounded_outline')
 
     def show_all(self):
-        pass
+        data = [[str(i.name), str(i.phones),
+                str(i.email), str(i.birthday), str(i.address)]
+                for i in self.data.values()]
+        headers = ['Name', 'Phones', 'Email', 'Birthday', 'Address']
+        show_in_console(data, headers)
 
     # name handling
     def change_name(self):
@@ -58,14 +65,14 @@ class Book(UserDict):
             old_record = self.data[str(name)]
             self.data[str(new_name)] = old_record
             del self.data[str(name)]
-            return f"Note title '{name}' was changed to new '{new_name}'!"
-        return f"Note with title '{name}' doesn't exist!"
+            return f"Contact {str(name)} name was changed to new '{new_name}'!"
+        return f'Contact {str(name)} doesn`t exist in contacts'
 
 # phone handling
     def add_phone(self):
         name = Name(name_input('name'))
         if str(name) not in self.data:
-            return f'Contact {str(name)} not exist in contacts'
+            return f'Contact {str(name)} doesn`t exist in contacts'
         phone = Phone(phone_input('new phone (max 3) separated by space'))
         self.data[str(name)].phones.value.append(phone.value[0])
         return f'Phone {str(phone)} was added to contact {str(name)}'
@@ -73,7 +80,7 @@ class Book(UserDict):
     def change_phone(self):
         name = Name(name_input('name'))
         if str(name) not in self.data:
-            return f'Contact {str(name)} not exist in contacts'
+            return f'Contact {str(name)} doesn`t exist in contacts!'
         old_phone = Phone(phone_input('old phone'))
         new_phone = Phone(phone_input('new phone'))
         record = self.data[str(name)]
@@ -83,14 +90,14 @@ class Book(UserDict):
                 record.phones.value[i] = new_phone.value[0]
                 change_flag = True
         if change_flag:
-            return f'Phone {old_phone} was changed to {new_phone}'
+            return f'Phone {old_phone} was changed to {new_phone}!'
         else:
-            return f'{old_phone} is not exist. Try again'
+            return f"Number {old_phone} doesn`t exist in contact '{name}'!"
 
     def remove_phone(self):
         name = Name(name_input('name'))
         if str(name) not in self.data:
-            return f'Contact {str(name)} not exist in contacts'
+            return f'Contact {str(name)} doesn`t exist in contacts!'
         old_phone = Phone(phone_input('phone for remove'))
         record = self.data[str(name)]
         change_flag = False
@@ -99,9 +106,9 @@ class Book(UserDict):
                 record.phones.value.remove(phone)
                 change_flag = True
         if change_flag:
-            return f'Phone {old_phone} was remove from contact {name}'
+            return f'Phone {old_phone} was removed from contact {name}!'
         else:
-            return f'{old_phone} is not exist. Try again'
+            return f"Number {old_phone} doesn`t exist in contact '{name}'!"
 
 # email handling
     def add_email(self):
@@ -136,11 +143,11 @@ class Book(UserDict):
 class ContactRecord:
 
     def __init__(self, name, phone=None, email=None, birthday=None, address=None):
-        self.name = Name(name)
-        self.birthday = Birthday(birthday) if birthday else None
+        self.name = name
+        self.birthday = birthday if birthday else None
         self.phones = phone if phone else []
-        self.email = Email(email) if email else None
-        self.address = Address(address) if address else None
+        self.email = email if email else None
+        self.address = address if address else None
 
 
 class ContactField:
@@ -159,12 +166,12 @@ class ContactField:
 # Прописати __str__
 class Name(ContactField):
     def __str__(self):
-        return self.value
+        return self.value.capitalize()
 
 
 class Phone(ContactField):
     def __str__(self):
-        return ', '.join(self.value)
+        return ', '.join(self.value) if self.value else "-"
 
 
 class Email(ContactField):

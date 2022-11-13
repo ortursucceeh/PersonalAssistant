@@ -1,6 +1,6 @@
 from tabulate import tabulate
 
 
-def show_in_console(data: list, headers='firstrow'):
+def show_in_console(data: list, headers='firstrow', format='fancy_grid'):
     print(tabulate(data, headers=headers,
-                   tablefmt='fancy_grid', showindex='always'))
+                   tablefmt=format, showindex='always'))
