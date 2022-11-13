@@ -15,7 +15,7 @@ def emailInput(type_email='email'):
         email = input(f'Enter {type_email}: ')
         if check_email(email):
             return email
-        print('Wrong email format.')
+        print('Wrong email format. Please enter correct e-mail.')
 
 
 def birhtdayInput(birthday):
@@ -23,12 +23,22 @@ def birhtdayInput(birthday):
         birthday = input(f'Enter birthady: ')
         if check_birthday(birthday):
             return birthday
-        print('Wrong birhtday format.')
+        print('Wrong birhtday format. Please enter birthday in format: DD.MM.YYYY')
 
 
-def addressInput(address=None):
-    address = input(f'Enter address: ')
-    return address
+def addressInput(address=None): #<--- add check
+    while True:
+        address = input(f'Enter address: ')
+        if check_address(address):
+            return address
+        print("You didn't enter an address.")
+
+
+def daysnumberInput(number):
+    number = input(f'Enter number of the days before birthady: ')
+    if check_daysnumber(number):
+        return number
+    print('Wrong format. Please enter number.')
 
 
 # return True\False
@@ -36,15 +46,23 @@ def check_name(name):
     return bool(name)
 
 
+def check_address(address):
+    return bool(address)
+
+
 def check_email(email):
     if re.fullmatch(r'[a-zA-Z]+[a-zA-Z0-9_.]+@[a-zA-Z]+[.][a-zA-Z]{2,}', email):
         return email
-    else:
-        raise Exception(f'Please enter correct e-mail address')
 
 
 def check_birthday(birthday):
     try:
-        birthday = datetime.strptime(birthday, '%d-%m-%Y')
+        birthday = datetime.strptime(birthday, '%d.%m.%Y')
+        return True
     except:
-        raise Exception(f'Please enter birthday in format: DD-MM-YYYY')
+        return False
+
+
+def check_daysnumber(number):
+    if number.isdgit(): 
+        return int(number)

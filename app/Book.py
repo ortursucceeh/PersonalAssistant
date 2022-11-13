@@ -42,8 +42,10 @@ class Book(UserDict):
 
 # email handling
     def add_email(self):
-        name = Name(nameInput(name))
-        email = Email(emailInput(email))
+        name = Name(nameInput('the name for which email should be added'))
+        # перевірити чи існує контакт
+        email = Email(emailInput('email'))
+        # перевірити чи існує email
         self.data[str(name)].email = email
         return f'Email {str(email)} was added to the Contact "{str(name)}"'
 
@@ -52,7 +54,7 @@ class Book(UserDict):
         # name = Name(nameInput(name))
         # old_email = X
         # new_email = Y
-        # record = self.data[str(name)]
+        # self.data[str(name)].email = new_email
         # if 
         #     return f'Email "{old_email}" was changed on "{new_email}" for "{str(name)}"'
         # else:
@@ -70,8 +72,9 @@ class Book(UserDict):
         self.data[str(name)].birthday = birthday
         return f'Birthday date {str(birthday)} was added to the Contact "{str(name)}"'
 
-    def show_birthdays_after(self, N=7): # <----------------------------------- ?
+    def show_birthdays_after(self): # <----------------------------------- ?
         pass
+        # введіть кількість днів
         # today_day = datetime.now()
         # today_year = datetime.now().year
         # contacts_list = []
@@ -119,11 +122,11 @@ class Book(UserDict):
 class ContactRecord:
 
     def __init__(self, name, phone=None, email=None, birthday=None, address=None):
-        self.name = Name(name)
-        self.birthday = Birthday(birthday) if birthday else None
-        self.phones = [Phone(phone)] if phone else []
-        self.email = Email(email) if email else None
-        self.address = Address(address) if address else None
+        self.name = name
+        self.birthday = birthday if birthday else None
+        self.phones = phone if phone else []
+        self.email = email if email else None
+        self.address = address if address else None
 
 
 class ContactField:
@@ -142,7 +145,7 @@ class ContactField:
 # Прописати __str__
 class Name(ContactField):
     def __str__(self):
-        return self.value
+        return self.value.capitilize()
 
 
 class Phone(ContactField):
