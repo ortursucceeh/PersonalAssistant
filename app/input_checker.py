@@ -2,18 +2,15 @@ import re
 from datetime import datetime
 
 
-
-def name_input(type_name='name'):
+def nameInput(type_name='name'):
     while True:
         name = input(f'Enter contact {type_name}: ').lower()
         if check_name(name):
             return name
-        print('Wrong name!')
-            return name.capitalize()
         print('You entered an empty string. Try again.')
 
 
-def phone_input(type_name='phone'):
+def phoneInput(type_name='phone'):
     while True:
         phone = input(f'Enter {type_name} like "+38XXXXXXXXXX": ')
         if not phone:
@@ -24,7 +21,8 @@ def phone_input(type_name='phone'):
         check_flag = True
         for data in phone.split():
             if not check_phone(data):
-                print(f'Phone number {data} does not match "+38XXXXXXXXXX". Try again.')
+                print(
+                    f'Phone number {data} does not match "+38XXXXXXXXXX". Try again.')
                 check_flag = False
         if check_flag:
             return phone.split()
@@ -84,12 +82,12 @@ def check_birthday(birthday):
 
 
 def check_daysnumber(number):
-    if number.isdigit(): 
+    if number.isdigit():
         return int(number)
+
 
 def check_phone(phone):
     return bool(re.findall(r'[+38]\d{12}', phone)) and len(phone) == 13
-
 
 
 # Notes functions
@@ -148,5 +146,3 @@ def check_keywords(keywords):
 
 def check_notedata(notedata):
     return 0 < len(notedata) <= 120
-
-
