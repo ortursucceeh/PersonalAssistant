@@ -42,10 +42,30 @@ def keywordsInput(kwords_type='keywords'):
 
 def notedataInput(notedata_type='note data'):
     while True:
-        notedata = input(f'Enter {notedata_type}: ')
+        notedata = input(f'Enter {notedata_type}(max 120 chars): ')
         if check_notedata(notedata):
             return notedata
-        print("Wrong notedata format.")
+        print(
+            "Wrong notedata format.\n\
+                Data length must be between [1:120] characters!")
+
+
+def tagsInput(tag='tag'):
+    while True:
+        tags = input(f"Enter {tag}: ")
+        if bool(tags):
+            return tags
+        print("Wrong input!")
+
+
+def categoryInput():
+    while True:
+        print("1: Title;\n2: Keywords;\n3: Note data;")
+        category = input(
+            f"Select the digit of the category that you want to sort by: ")
+        if category in '123':
+            return category
+        print("Wrong digit!")
 
 
 def check_title(title):
@@ -57,4 +77,4 @@ def check_keywords(keywords):
 
 
 def check_notedata(notedata):
-    return 0 < len(notedata) <= 255
+    return 0 < len(notedata) <= 120
