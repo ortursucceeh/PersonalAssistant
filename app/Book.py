@@ -45,7 +45,7 @@ class Book(UserDict):
         name = Name(nameInput('the name for which you want to add email'))
         if str(name) in self.data:
             if not self.data[str(name)].email:
-                email = Email(emailInput('the email to add: '))
+                email = Email(emailInput('the email to add'))
                 self.data[str(name)].email = email
                 return f'Email "{email}" was added to the Contact "{name}"'
             return f'Contact "{name}" already has the email! You can change it by entering command "change_email".'
@@ -55,7 +55,7 @@ class Book(UserDict):
         name = Name(nameInput('the name for which you want to change email'))
         if str(name) in self.data:
             if self.data[str(name)].email:
-                new_email = Email(emailInput('the new email: '))
+                new_email = Email(emailInput('the new email'))
                 old_email = self.data[str(name)].email
                 self.data[str(name)].email = new_email
                 return f'Email "{old_email}" was changed to "{new_email}"'
@@ -76,7 +76,7 @@ class Book(UserDict):
         name = Name(nameInput('the name for which you want to add birthday'))
         if str(name) in self.data:
             if not self.data[str(name)].birthday:
-                birthday = Birthday(birthdayInput('the birthday date to add: '))
+                birthday = Birthday(birthdayInput('the birthday date to add'))
                 self.data[str(name)].birthday = birthday
                 return f'Birthday "{birthday}" was added to the Contact "{name}"'
             return f'Contact "{name}" already has the birhtday!'
@@ -112,10 +112,10 @@ class Book(UserDict):
         name = Name(nameInput('the name for which you want to add address'))
         if str(name) in self.data:
             if not self.data[str(name)].address:
-                address = Address(addressInput('the address to add: '))
+                address = Address(addressInput('the address to add'))
                 self.data[str(name)].address = address
                 return f'Address "{address}" was added to the Contact "{name}"'
-            return f'Contact "{name}" already has the address. To change it enter the command "address".'
+            return f'Contact "{name}" already has the address. To change it enter the command "change_address".'
         return f'Contact "{name}" does not exist'
 
     def change_address(self):
