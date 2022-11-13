@@ -64,5 +64,5 @@ def check_birthday(birthday):
 
 
 def check_daysnumber(number):
-    if number.isdgit(): 
+    if number.isdigit(): 
         return int(number)
