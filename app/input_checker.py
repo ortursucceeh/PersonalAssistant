@@ -7,7 +7,7 @@ def nameInput(type_name='name'):
         name = input(f'Enter {type_name}: ')
         if check_name(name):
             return name
-        print('Wrong name')
+        print('Wrong name!')
 
 
 def emailInput(type_email='email'):
@@ -18,15 +18,15 @@ def emailInput(type_email='email'):
         print('Wrong email format. Please enter correct e-mail.')
 
 
-def birhtdayInput(birthday):
+def birhtdayInput(type_birthday='birthday'):
     while True:
-        birthday = input(f'Enter birthady: ')
+        birthday = input(f'Enter {type_birthday}: ')
         if check_birthday(birthday):
             return birthday
         print('Wrong birhtday format. Please enter birthday in format: DD.MM.YYYY')
 
 
-def addressInput(address=None): #<--- add check
+def addressInput(address=None):
     while True:
         address = input(f'Enter address: ')
         if check_address(address):
@@ -34,7 +34,7 @@ def addressInput(address=None): #<--- add check
         print("You didn't enter an address.")
 
 
-def daysnumberInput(number):
+def daysnumberInput(type_number='number'):
     number = input(f'Enter number of the days before birthady: ')
     if check_daysnumber(number):
         return number
