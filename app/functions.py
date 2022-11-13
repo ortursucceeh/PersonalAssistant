@@ -3,7 +3,7 @@ import os
 import pickle
 from Book import Book
 from Notes import Notes
-from constants import exit_words,hello_words
+from constants import exit_words, hello_words
 from tabulate import tabulate
 
 contacts = Book()
@@ -44,45 +44,55 @@ handler = {
 
 }
 
+
 def user_mistake(command):
-    posssibilty = difflib.get_close_matches(command, handler.keys(), n=3, cutoff=0.55)
+    posssibilty = difflib.get_close_matches(
+        command, handler.keys(), n=3, cutoff=0.55)
     if posssibilty:
-        letters=['1','2','3']
+        letters = ['1', '2', '3']
         print("Looks like you make a mistake.")
         for i in range(len(posssibilty)):
             print(f"Type '{letters[i]}' if you mean '{posssibilty[i]}'")
-        new_user_input=input("Enter Digit: ").capitalize().strip()
+        new_user_input = input("Enter Digit: ").capitalize().strip()
         while new_user_input not in letters:
-            new_user_input=input("Enter One of the Digits Above to Choose Function: ").capitalize().strip()
+            new_user_input = input(
+                "Enter One of the Digits Above to Choose Function: ").capitalize().strip()
         return posssibilty[letters.index(new_user_input)]
 
+
 def show_commands():
-    keysList=list(handler.keys())
-    contact_func=keysList[0:16]
-    notes_func=keysList[17:]
-    other_commands=["show_commands", "sort_folder", "show_doc","show_all_contacts","show_all_notes"]
-    table_headers=["Contacts Commands","Notes Commands","Hello Comands","Exit Commands","Other Commands"]
-    table=[]
-    n=0
+    keysList = list(handler.keys())
+    contact_func = keysList[0:16]
+    notes_func = keysList[17:]
+    other_commands = ["show_commands", "sort_folder",
+                      "show_doc", "show_all_contacts", "show_all_notes"]
+    table_headers = ["Contacts Commands", "Notes Commands",
+                     "Exit Commands", "Hello Comands", "Other Commands"]
+    table = []
+    n = 0
     for i in contact_func:
         try:
-            table.append([i,notes_func[n],exit_words[n],hello_words[n],other_commands[n]])
-            n+=1
+            table.append([i, notes_func[n], exit_words[n],
+                         hello_words[n], other_commands[n]])
+            n += 1
         except IndexError:
             try:
-                table.append([i,notes_func[n]," "," ",other_commands[n]])
-                n+=1
+                table.append([i, notes_func[n], " ", " ", other_commands[n]])
+                n += 1
             except IndexError:
                 try:
-                    table.append([i,notes_func[n]])
-                    n+=1
+                    table.append([i, notes_func[n]])
+                    n += 1
                 except IndexError:
                     table.append([i])
-    print(tabulate(table,headers=table_headers,tablefmt="psql",numalign="center"))
+    print(tabulate(table, headers=table_headers,
+          tablefmt="psql", numalign="center"))
+
 
 def start_func():
-   print('start')
-   quit()
+    print('start')
+    quit()
+
 
 def exit_func():
     print('exit')

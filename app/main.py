@@ -1,8 +1,9 @@
-from functions import handler, user_mistake, exit_func, hello_func
+from functions import handler, user_mistake, exit_func, hello_func, show_commands
 from constants import hello_words, exit_words
 
 
 def main():
+    show_commands()
     while True:
         command = input("Enter command: ").lower().strip()
 
