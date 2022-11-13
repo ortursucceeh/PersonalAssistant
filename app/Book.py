@@ -1,7 +1,8 @@
 from collections import UserDict
-# , email_input, adsress_input, birthday_input
-from input_checker import name_input, phone_input
+from input_checker import name_input, phone_input, nameInput, emailInput, birthdayInput, addressInput, daysnumberInput
+from datetime import datetime
 from console_output import show_in_console
+
 
 
 class Book(UserDict):
@@ -112,32 +113,101 @@ class Book(UserDict):
 
 # email handling
     def add_email(self):
-        pass
+        name = Name(nameInput('the name for which you want to add email'))
+        if str(name) in self.data:
+            if not self.data[str(name)].email:
+                email = Email(emailInput('the email to add'))
+                self.data[str(name)].email = email
+                return f'Email "{email}" was added to the Contact "{name}"'
+            return f'Contact "{name}" already has the email! You can change it by entering command "change_email".'
+        return f'Contact "{name}" does not exist!'
 
-    def change_email(self):
-        pass
+    def change_email(self):# <----------------------------------- ?
+        name = Name(nameInput('the name for which you want to change email'))
+        if str(name) in self.data:
+            if self.data[str(name)].email:
+                new_email = Email(emailInput('the new email'))
+                old_email = self.data[str(name)].email
+                self.data[str(name)].email = new_email
+                return f'Email "{old_email}" was changed to "{new_email}"'
+            return f'Contact "{name}" has no email! You can add it by entering the command "add_email".'
+        return f'Contact "{name}" does not exist!'
 
     def remove_email(self):
-        name = self.NameInput()
-        self.data[name].email = None
+        name = Name(nameInput('the name for which you want to remove email'))
+        if str(name) in self.data:
+            if self.data[str(name)].email:
+                self.data[str(name)].email = None
+                return f'Email for the Contact "{name}" was removed'
+            return f'Contact "{name}" has no email!'
+        return f'Contact "{name}" does not exist!'
 
 # birthday handling
     def add_birthday(self):
-        pass
+        name = Name(nameInput('the name for which you want to add birthday'))
+        if str(name) in self.data:
+            if not self.data[str(name)].birthday:
+                birthday = Birthday(birthdayInput('the birthday date to add'))
+                self.data[str(name)].birthday = birthday
+                return f'Birthday "{birthday}" was added to the Contact "{name}"'
+            return f'Contact "{name}" already has the birhtday!'
+        return f'Contact "{name}" does not exist!'
 
-    def show_birthdays_after(self):
-        pass
+# func to calculate days number from today to the birtday
+    def days_to_bd(self):# <-------------------------------------------------------NOT finished
+        today_day = datetime.now()
+        today_year = datetime.now().year
+        dif = today_day - self.birthday.value.replace(year=today_year)
+        if dif >= 0:
+            days_number = dif.days
+        else:
+            dif = self.birthday.value.replace(year=today_year+1) - today_day
+            days_number = dif.days
+        return days_number
+
+# func to show the list of birthdays which are in 'N' days from today
+    def show_birthdays_after(self): # <-------------------------------------------NOT finished
+        days_number = daysnumberInput('days number to birthady')
+        contacts_list = []
+        for name, record in self.data.items():
+            if record.birthday:
+                if days_number == days_to_bd(record.birthday):
+                    contacts_list.append(record)
+        if contacts_list:
+            return f'Contacts in {days_number} days from today are: \n{contacts_list}'
+        else:
+            return f'No contacts with birthday after {days_number} days from today'
 
 # address handling
-
     def add_address(self):
-        pass
+        name = Name(nameInput('the name for which you want to add address'))
+        if str(name) in self.data:
+            if not self.data[str(name)].address:
+                address = Address(addressInput('the address to add'))
+                self.data[str(name)].address = address
+                return f'Address "{address}" was added to the Contact "{name}"'
+            return f'Contact "{name}" already has the address. To change it enter the command "change_address".'
+        return f'Contact "{name}" does not exist'
 
     def change_address(self):
-        pass
+        name = Name(nameInput('the name for which you want to change address'))
+        if str(name) in self.data:
+            if self.data[str(name)].address:
+                new_address = Address(addressInput('the new address'))
+                old_address = self.data[str(name)].address
+                self.data[str(name)].address = new_address
+                return f'Address "{old_address}" was changed to "{new_address}"'
+            return f'Contact "{name}" has no address! You can add it by entering the command "add_address".'
+        return f'Contact "{name}" does not exist!'
 
     def remove_address(self):
-        pass
+        name = Name(nameInput('the name for which you want to remove address'))
+        if str(name) in self.data:
+            if self.data[str(name)].address:
+                self.data[str(name)].address = None
+                return f'Address for the Contact "{name}" was removed'
+            return f'Contact "{name}" has no address!'
+        return f'Contact "{name}" does not exist!'
 
 
 class ContactRecord:
@@ -174,13 +244,17 @@ class Phone(ContactField):
         return ', '.join(self.value) if self.value else "-"
 
 
+
 class Email(ContactField):
-    pass
+    def __str__(self):
+        return self.value
 
 
 class Birthday(ContactField):
-    pass
+    def __str__(self):
+        return self.value
 
 
 class Address(ContactField):
-    pass
+    def __str__(self):
+        return self.value
