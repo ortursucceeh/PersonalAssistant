@@ -61,6 +61,8 @@ def start_func():
     w_t1="Welcome dear User. "
     w_t2="Our small application works with your contact list and notes. " 
     w_t3="Type one of below self-explanatory command to start work with it."
+    exit_words = ['close', 'exit']
+    hello_words = ['hello','privet']
     table1 = PrettyTable()
     table1.field_names=[w_t1+w_t2+w_t3]
     table1.align = "r"
