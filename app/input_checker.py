@@ -18,7 +18,7 @@ def emailInput(type_email='email'):
         print('Wrong email format. Please enter correct e-mail.')
 
 
-def birhtdayInput(type_birthday='birthday'):
+def birthdayInput(type_birthday='birthday'):
     while True:
         birthday = input(f'Enter {type_birthday}: ')
         if check_birthday(birthday):
