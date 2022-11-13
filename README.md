@@ -44,6 +44,6 @@ Command Line Bot
 
 ## Developers
 
-- [Delevoper Name](GitHub Profile Link)
+- [ortursucceeh](https://github.com/ortursucceeh)
 
 ## License
