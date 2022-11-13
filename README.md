@@ -48,4 +48,4 @@ Command Line Bot
 - [Serhii-Kravchenko-2022](https://github.com/Serhii-Kravchenko-2022) [SergiiOshmarin](https://github.com/SergiiOshmarin)
 
 ## License
-Project Burning-Lab.SwipeDetector is distributed under the MIT license.
+Project Project-Personal_assistant is distributed under the MIT license.
