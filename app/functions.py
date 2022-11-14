@@ -46,10 +46,9 @@ start_func()
 
 
 def show_commands():
-
     keysList = list(handler.keys())
     contact_func = keysList[0:16]
-    notes_func = keysList[17:]
+    notes_func = keysList[17:-1]
     other_commands = ["show_commands", "sort_folder",
                       "show_doc", "show_all_contacts", "show_all_notes"]
     table_headers = ["Contacts Commands", "Notes Commands",
@@ -105,8 +104,8 @@ handler = {
     'remove_keyword': notes.remove_keywords,
     'add_notedata': notes.add_notedata,
     'change_notedata': notes.change_notedata,
-    'remove_notedata': notes.remove_notedata
-
+    'remove_notedata': notes.remove_notedata,
+    'show_commands': show_commands
 }
 
 
@@ -123,45 +122,6 @@ def user_mistake(command):
             new_user_input = input(
                 "Enter One of the Digits Above to Choose Function: ").capitalize().strip()
         return posssibilty[letters.index(new_user_input)]
-
-
-def show_commands():
-    keysList = list(handler.keys())
-    contact_func = keysList[0:16]
-    notes_func = keysList[17:]
-    other_commands = ["show_commands", "sort_folder",
-                      "show_doc", "show_all_contacts", "show_all_notes"]
-    table_headers = ["Contacts Commands", "Notes Commands",
-                     "Exit Commands", "Hello Comands", "Other Commands"]
-    table = []
-    n = 0
-    for i in contact_func:
-        try:
-            table.append([i, notes_func[n], exit_words[n],
-                         hello_words[n], other_commands[n]])
-            n += 1
-        except IndexError:
-            try:
-                table.append([i, notes_func[n], " ", " ", other_commands[n]])
-                n += 1
-            except IndexError:
-                try:
-                    table.append([i, notes_func[n]])
-                    n += 1
-                except IndexError:
-                    table.append([i])
-    print(tabulate(table, headers=table_headers,
-          tablefmt="psql", numalign="center"))
-
-
-def start_func():
-    print('start')
-    quit()
-
-
-def exit_func():
-    print('exit')
-    quit()
 
 
 def hello_func():

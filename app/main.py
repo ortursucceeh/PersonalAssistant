@@ -9,7 +9,6 @@ def main():
         if command in handler:
             answer = handler[command]()
             if answer:
-                # Here should be real command,and not print.Print just for showing
                 print(answer)
             else:
                 continue
