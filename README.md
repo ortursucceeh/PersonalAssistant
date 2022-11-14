@@ -1,7 +1,7 @@
 # Project-Personal_assistant
 
 <p align="center">
-      <img src="Project Logo Url" width="726">
+      <img src="https://i.pinimg.com/564x/5f/17/3e/5f173e05d2511fe6757d99150a6c785a.jpg" width="726">
 </p>
 
 <p align="center">
