@@ -10,38 +10,39 @@ class Book(UserDict):
     def add_contact(self):
         name = Name(nameInput('name'))
         if str(name) in self.data:
-            return f'Contact {str(name)} exist in contacts'
-        phones = Phone(phoneInput("phone number's (max 3) separated by space"))
+            return f'Contact {str(name)} is already in contacts!'
+        phones = Phone(phoneInput("phone numbers (max 3) separated by space"))
         email = Email(emailInput('email'))
-        address = Address(addressInput('address'))
         birthday = Birthday(birthdayInput('birthday'))
+        address = Address(addressInput('address'))
         record = ContactRecord(name, phones, email, birthday, address)
         self.data[str(name)] = record
-        return f'Contact {str(name)} was added to contacts'
+        return f'Contact {str(name)} was added to contacts!'
 
     def change_contact(self):
         name = Name(nameInput('name'))
         if str(name) not in self.data:
-            return f'Contact {str(name)} does`t exist in contacts'
-        phones = Phone(phoneInput("new phone number's (max 3) separated by space"))
+            return f'Contact {str(name)} doesn`t exist in contacts!'
+        phones = Phone(phoneInput(
+            "new phone numbers (max 3) separated by space"))
         email = Email(emailInput('email'))
-        address = Address(addressInput('address'))
         birthday = Birthday(birthdayInput('birthday'))
+        address = Address(addressInput('address'))
         record = ContactRecord(name, phones, email, birthday, address)
         self.data[str(name)] = record
-        return f'Contact {str(name)} was changed in contacts'
+        return f'Contact {str(name)} was changed in contacts!'
 
     def remove_contact(self):
         name = Name(nameInput('name'))
         if str(name) not in self.data:
-            return f'Contact {str(name)} does`t exist in contacts'
+            return f'Contact {str(name)} doesn`t exist in contacts!'
         self.data.pop(str(name))
         return f'Contact {str(name)} was removed from contacts!'
 
     def show_contact(self):
         name = Name(nameInput('name'))
         if str(name) not in self.data:
-            return f'Contact {str(name)} does`t exist in contacts'
+            return f'Contact {str(name)} doesn`t exist in contacts!'
         record = self.data[str(name)]
         data = [[str(record.name), str(record.phones),
                 str(record.email), str(record.birthday), str(record.address)]]
@@ -53,7 +54,7 @@ class Book(UserDict):
                 str(i.email), str(i.birthday), str(i.address)]
                 for i in self.data.values()]
         headers = ['Name', 'Phones', 'Email', 'Birthday', 'Address']
-        show_in_console(data, headers)
+        show_in_console(data, headers, "mixed_grid")
 
     # name handling
     def change_name(self):
@@ -65,13 +66,13 @@ class Book(UserDict):
             old_record.name = new_name
             del self.data[str(name)]
             return f"Contact {str(name)} name was changed to new '{new_name}'!"
-        return f'Contact {str(name)} doesn`t exist in contacts'
+        return f'Contact {str(name)} doesn`t exist in contacts!'
 
 # phone handling
     def add_phone(self):
         name = Name(nameInput('name'))
         if str(name) not in self.data:
-            return f'Contact {str(name)} does`t exist in contacts'
+            return f'Contact {str(name)} doesn`t exist in contacts!'
         phone = Phone(phoneInput('new phone number'))
         self.data[str(name)].phones.value.append(phone.value[0])
         return f'Phone {str(phone)} was added to contact {str(name)}'
@@ -79,7 +80,7 @@ class Book(UserDict):
     def change_phone(self):
         name = Name(nameInput('name'))
         if str(name) not in self.data:
-            return f'Contact {str(name)} does`t exist in contacts!'
+            return f'Contact {str(name)} doesn`t exist in contacts!'
         old_phone = Phone(phoneInput('phone number which you want to change'))
         new_phone = Phone(phoneInput('new phone number'))
         record = self.data[str(name)]
@@ -91,12 +92,12 @@ class Book(UserDict):
         if change_flag:
             return f'Phone {old_phone} was changed to {new_phone}!'
         else:
-            return f"Number {old_phone} does`t exist in contact '{name}'!"
+            return f"Number {old_phone} doesn`t exist in contact '{name}'!"
 
     def remove_phone(self):
         name = Name(nameInput('name'))
         if str(name) not in self.data:
-            return f'Contact {str(name)} does`t exist in contacts!'
+            return f'Contact {str(name)} doesn`t exist in contacts!'
         old_phone = Phone(phoneInput('phone for remove'))
         record = self.data[str(name)]
         change_flag = False
@@ -107,7 +108,7 @@ class Book(UserDict):
         if change_flag:
             return f'Phone {old_phone} was removed from contact {name}!'
         else:
-            return f"Number {old_phone} does`t exist in contact '{name}'!"
+            return f"Number {old_phone} doesn`t exist in contact '{name}'!"
 
 # email handling
     def add_email(self):
@@ -118,7 +119,7 @@ class Book(UserDict):
                 self.data[str(name)].email = email
                 return f'Email "{email}" was added to the Contact "{name}"'
             return f'Contact "{name}" already has the email! You can change it by entering command "change_email".'
-        return f'Contact "{name}" does not exist!'
+        return f'Contact "{name}" doesn`t exist!'
 
     def change_email(self):  # <----------------------------------- ?
         name = Name(nameInput('the name for which you want to change email'))
@@ -129,7 +130,7 @@ class Book(UserDict):
                 self.data[str(name)].email = new_email
                 return f'Email "{old_email}" was changed to "{new_email}"'
             return f'Contact "{name}" has no email! You can add it by entering the command "add_email".'
-        return f'Contact "{name}" does not exist!'
+        return f'Contact "{name}" doesn`t exist!'
 
     def remove_email(self):
         name = Name(nameInput('the name for which you want to remove email'))
@@ -138,7 +139,7 @@ class Book(UserDict):
                 self.data[str(name)].email = None
                 return f'Email for the Contact "{name}" was removed'
             return f'Contact "{name}" has no email!'
-        return f'Contact "{name}" does not exist!'
+        return f'Contact "{name}" doesn`t exist!'
 
 # birthday handling
     def add_birthday(self):
@@ -154,7 +155,7 @@ class Book(UserDict):
 # func to show the list of contact's with birthdays which are in 'N' days from today
     def show_birthdays_after(self):
         if not self.data:
-            return f"Contact's data does't exist"
+            return f"Contact's data doesn`t exist"
         days_number = daysnumberInput()
         check_day = datetime.now() + timedelta(days=days_number)
         contacts_list = []
@@ -164,7 +165,7 @@ class Book(UserDict):
                 if birthday.day == check_day.day and birthday.month == check_day.month:
                     contacts_list.append(name)
         if not contacts_list:
-            return f"No contact's with birthday at {check_day.date()}"
+            return f"No contacts with birthday on {check_day.date()}"
         data = [[str(i.name), str(i.phones),
                  str(i.email), str(i.birthday), str(i.address)]
                 for k, i in self.data.items() if k in contacts_list]
@@ -179,8 +180,8 @@ class Book(UserDict):
                 address = Address(addressInput('the address to add'))
                 self.data[str(name)].address = address
                 return f'Address "{address}" was added to the Contact "{name}"'
-            return f'Contact "{name}" already has the address. To change it enter the command "change_address".'
-        return f'Contact "{name}" does not exist'
+            return f'Contact "{name}" already has the address! You can change it by entering "change_address".'
+        return f'Contact "{name}" doesn`t exist'
 
     def change_address(self):
         name = Name(nameInput('the name for which you want to change address'))
@@ -189,18 +190,18 @@ class Book(UserDict):
                 new_address = Address(addressInput('the new address'))
                 old_address = self.data[str(name)].address
                 self.data[str(name)].address = new_address
-                return f'Address "{old_address}" was changed to "{new_address}"'
+                return f'Address "{old_address}" was changed to "{new_address}"!'
             return f'Contact "{name}" has no address! You can add it by entering the command "add_address".'
-        return f'Contact "{name}" does not exist!'
+        return f'Contact "{name}" doesn`t exist!'
 
     def remove_address(self):
         name = Name(nameInput('the name for which you want to remove address'))
         if str(name) in self.data:
             if self.data[str(name)].address:
                 self.data[str(name)].address = None
-                return f'Address for the Contact "{name}" was removed'
+                return f'Address for the Contact "{name}" was removed!'
             return f'Contact "{name}" has no address!'
-        return f'Contact "{name}" does not exist!'
+        return f'Contact "{name}" doesn`t exist!'
 
 
 class ContactRecord:
@@ -239,14 +240,14 @@ class Phone(ContactField):
 
 class Email(ContactField):
     def __str__(self):
-        return self.value if self.value else None
+        return self.value if self.value else '-'
 
 
 class Birthday(ContactField):
     def __str__(self):
-        return self.value if self.value else None
+        return self.value if self.value else '-'
 
 
 class Address(ContactField):
     def __str__(self):
-        return self.value if self.value else None
+        return self.value if self.value else '-'

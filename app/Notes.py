@@ -38,9 +38,13 @@ class Notes(UserDict):
     #output in console
     def show_note(self):
         title = Title(titleInput())
-        if str(title) in self.data:
-            return f'\t\t{title}\n\t[ {self.data[str(title)].keywords} ]\n{self.data[str(title)].notedata}'
-        return f"Note with title '{title}' doesn't exist!"
+        if str(title) not in self.data:
+            return f"Note with title '{title}' doesn't exist!"
+        header = ['Title', 'Keywords', 'Data']
+        data = [[self.data[str(title)].title,
+                self.data[str(title)].keywords,
+                self.data[str(title)].notedata]]
+        show_in_console(data, header)
 
     def show_all(self):
 
