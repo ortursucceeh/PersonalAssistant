@@ -2,8 +2,8 @@ import difflib
 import shutil
 import os
 import pickle
-from Book import Book
-from Notes import Notes
+from book import Book
+from notes import Notes
 from pathlib import Path
 from constants import exit_words, hello_words
 from console_output import show_in_console

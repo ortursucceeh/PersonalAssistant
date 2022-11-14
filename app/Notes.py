@@ -102,7 +102,7 @@ class Notes(UserDict):
                     return 'Too much keywords!'
                 self.data[str(title)].keywords = self.data[str(
                     title)].keywords + keywords
-                return f"New keywords {keywords} was added to {title}!"
+                return f"New keywords {keywords} were added to {title}!"
             return f'-!- Note {title} already has maximum count of keywords! -!-'
         return f"-!- Note with title '{title}' doesn't exist! -!-"
 
@@ -110,8 +110,12 @@ class Notes(UserDict):
         title = Title(titleInput(
             'note title for which you want to change keywords'))
         if str(title) in self.data:
-            new_keywords = Keywords(keywordsInput('one new keyword'))
-            self.data[str(title)].keywords = new_keywords
+            len_kwords = len(self.data[str(title)].keywords)
+            if len_kwords < 3:
+                new_keywords = keywordsInput(f'new keywords(max 3)')
+                if len(new_keywords) > 3:
+                    return 'Too much keywords!'
+                self.data[str(title)].keywords = new_keywords
             return f"Note {title} keywards was changed to {str(new_keywords)}"
         return f"-!- Note with title '{title}' doesn't exist! -!-"
 
