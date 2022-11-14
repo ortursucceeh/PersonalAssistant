@@ -2,7 +2,7 @@ import re
 from datetime import datetime
 
 
-def nameInput(type_name='name'):
+def name_input(type_name='name'):
     while True:
         name = input(f'Enter contact {type_name}: ').lower()
         if check_name(name):
@@ -10,7 +10,7 @@ def nameInput(type_name='name'):
         print('-!- You entered an empty string! -!-')
 
 
-def phoneInput(type_name='phone'):
+def phone_input(type_name='phone'):
     while True:
         phone = input(f'Enter {type_name}: ')
         if not phone:
@@ -28,7 +28,7 @@ def phoneInput(type_name='phone'):
             return phone.split()
 
 
-def emailInput(type_email='email'):
+def email_input(type_email='email'):
     while True:
         email = input(f'Enter {type_email}: ')
         if check_email(email) or not email:
@@ -36,7 +36,7 @@ def emailInput(type_email='email'):
         print('-!- Wrong email format! -!-\nPlease enter correct email.')
 
 
-def birthdayInput(type_birthday='birthday'):
+def birthday_input(type_birthday='birthday'):
     while True:
         birthday = input(f'Enter {type_birthday}: ')
         if check_birthday(birthday) or not birthday:
@@ -44,7 +44,7 @@ def birthdayInput(type_birthday='birthday'):
         print('-!- Wrong birthday format! -!-\nPlease enter birthday in format: DD.MM.YYYY')
 
 
-def addressInput(address=None):
+def address_input(address=None):
     while True:
         address = input(f'Enter address: ')
         if check_address(address) or not address:
@@ -52,7 +52,7 @@ def addressInput(address=None):
         print("-!- Wrong input format -!-")
 
 
-def daysnumberInput():
+def daysnumber_input():
     number = input(f'Enter number of the days to birthday: ')
     if check_daysnumber(number):
         return int(number)
@@ -61,7 +61,7 @@ def daysnumberInput():
 # Notes functions
 
 
-def titleInput(title_type='title'):
+def title_input(title_type='title'):
     while True:
         title = input(f'Enter {title_type}: ')
         if check_title(title):
@@ -69,7 +69,7 @@ def titleInput(title_type='title'):
         print("-!- Wrong title format! -!-")
 
 
-def keywordsInput(kwords_type='keywords'):
+def keywords_input(kwords_type='keywords'):
     while True:
         keywords = input(f'Enter {kwords_type}(max 3) separated by space: ')
         if check_keywords(keywords):
@@ -77,7 +77,7 @@ def keywordsInput(kwords_type='keywords'):
         print("-!- Wrong keywords format! -!-")
 
 
-def notedataInput(notedata_type='note data'):
+def notedata_input(notedata_type='note data'):
     while True:
         notedata = input(f'Enter {notedata_type}(max 120 chars): ')
         if check_notedata(notedata):
@@ -87,7 +87,7 @@ def notedataInput(notedata_type='note data'):
                 Data length must be between [1:120] characters!")
 
 
-def tagsInput(tag='tag'):
+def tags_input(tag='tag'):
     while True:
         tags = input(f"Enter {tag}: ")
         if bool(tags):
@@ -95,7 +95,7 @@ def tagsInput(tag='tag'):
         print("-!- Wrong input! -!-")
 
 
-def categoryInput():
+def category_input():
     while True:
         print("1: Title;\n2: Keywords;\n3: Note data;")
         category = input(
@@ -124,7 +124,7 @@ def check_birthday(birthday):
     try:
         birthday = datetime.strptime(birthday, '%d.%m.%Y')
         return True
-    except:
+    except NameError:
         return False
 
 
