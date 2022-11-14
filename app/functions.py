@@ -4,8 +4,22 @@ import pickle
 from Book import Book
 from Notes import Notes
 from constants import exit_words, hello_words
-from tabulate import tabulate
 from console_output import show_in_console
+
+
+def user_mistake(command):
+    posssibilty = difflib.get_close_matches(
+        command, handler.keys(), n=3, cutoff=0.55)
+    if posssibilty:
+        letters = ['1', '2', '3']
+        print("Looks like you make a mistake.")
+        for i in range(len(posssibilty)):
+            print(f"Type '{letters[i]}' if you mean '{posssibilty[i]}'")
+        new_user_input = input("Enter Digit: ").capitalize().strip()
+        while new_user_input not in letters:
+            new_user_input = input(
+                "Enter One of the digits above to choose function: ").capitalize().strip()
+        return posssibilty[letters.index(new_user_input)]
 
 
 def start_func():
@@ -42,10 +56,8 @@ def exit_func():
     quit()
 
 
-start_func()
-
-
 def show_commands():
+    print("All commands:")
     keysList = list(handler.keys())
     contact_func = keysList[0:16]
     notes_func = keysList[17:-1]
@@ -73,6 +85,12 @@ def show_commands():
     show_in_console(table, table_headers, "psql")
 
 
+def hello_func():
+    print('Hello! How can I help you?')
+
+
+contacts, notes = start_func()
+
 handler = {
     'add_contact': contacts.add_contact,
     'change_contact': contacts.change_contact,
@@ -99,30 +117,11 @@ handler = {
     'sort_notes_by': notes.sort_notes_by,
     'show_notes_with_tag': notes.show_notes_with_tag,
     'change_title': notes.change_title,
-    'add_keyword': notes.add_keywords,
-    'change_keyword': notes.change_keywords,
-    'remove_keyword': notes.remove_keywords,
+    'add_keywords': notes.add_keywords,
+    'change_keywords': notes.change_keywords,
+    'remove_keywords': notes.remove_keywords,
     'add_notedata': notes.add_notedata,
     'change_notedata': notes.change_notedata,
     'remove_notedata': notes.remove_notedata,
     'show_commands': show_commands
 }
-
-
-def user_mistake(command):
-    posssibilty = difflib.get_close_matches(
-        command, handler.keys(), n=3, cutoff=0.55)
-    if posssibilty:
-        letters = ['1', '2', '3']
-        print("Looks like you make a mistake.")
-        for i in range(len(posssibilty)):
-            print(f"Type '{letters[i]}' if you mean '{posssibilty[i]}'")
-        new_user_input = input("Enter Digit: ").capitalize().strip()
-        while new_user_input not in letters:
-            new_user_input = input(
-                "Enter One of the Digits Above to Choose Function: ").capitalize().strip()
-        return posssibilty[letters.index(new_user_input)]
-
-
-def hello_func():
-    print('Hello! How can I help you?')

@@ -1,4 +1,4 @@
-from functions import handler, user_mistake, exit_func, hello_func, show_commands, start_func, exit_func
+from functions import handler, user_mistake, exit_func, hello_func, show_commands, exit_func
 from constants import hello_words, exit_words
 
 
@@ -21,10 +21,10 @@ def main():
             if second_try:
                 answer = handler[second_try]()
                 if answer:
-                    # Here should be real command,and not print.Print just for showing
                     print(answer)
             else:
-                print("Unknown command. Try another one")
+                print(
+                    "Unknown command. Try another one\nTo see all commands enter 'show_commands'")
 
 
 if __name__ == '__main__':
