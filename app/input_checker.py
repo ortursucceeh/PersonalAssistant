@@ -12,17 +12,16 @@ def nameInput(type_name='name'):
 
 def phoneInput(type_name='phone'):
     while True:
-        phone = input(f'Enter {type_name} like "+38XXXXXXXXXX": ')
+        phone = input(f'Enter {type_name}: ')
         if not phone:
             return []
         if len(phone.split()) > 3:
-            print('Too much phone numbers, must be max 3')
+            print("Too much phone number's, must be max 3")
             continue
         check_flag = True
         for data in phone.split():
             if not check_phone(data):
-                print(
-                    f'Phone number {data} does not match "+38XXXXXXXXXX". Try again.')
+                print(f'Phone number {data} must contain no more than 12 digits. Try again.')
                 check_flag = False
         if check_flag:
             return phone.split()
@@ -52,10 +51,10 @@ def addressInput(address=None):
         print("You didn't enter an address.")
 
 
-def daysnumberInput(type_number='number'):
-    number = input(f'Enter number of the days before birthady: ')
+def daysnumberInput():
+    number = input(f'Enter number of the days to birthday: ')
     if check_daysnumber(number):
-        return number
+        return int(number)
     print('Wrong format. Please enter number.')
 
 
@@ -82,12 +81,11 @@ def check_birthday(birthday):
 
 
 def check_daysnumber(number):
-    if number.isdigit():
-        return int(number)
+    return number.isdigit()
 
 
 def check_phone(phone):
-    return bool(re.findall(r'[+38]\d{12}', phone)) and len(phone) == 13
+    return phone.isdigit() and len(phone) < 13
 
 
 # Notes functions

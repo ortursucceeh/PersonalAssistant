@@ -1,6 +1,6 @@
 from collections import UserDict
 from input_checker import nameInput, phoneInput, emailInput, birthdayInput, addressInput, daysnumberInput
-from datetime import datetime
+from datetime import datetime, timedelta
 from console_output import show_in_console
 
 
@@ -11,7 +11,7 @@ class Book(UserDict):
         name = Name(nameInput('name'))
         if str(name) in self.data:
             return f'Contact {str(name)} exist in contacts'
-        phones = Phone(phoneInput('phone (max 3) separated by space'))
+        phones = Phone(phoneInput("phone number's (max 3) separated by space"))
         email = Email(emailInput('email'))
         address = Address(addressInput('address'))
         birthday = Birthday(birthdayInput('birthday'))
@@ -22,8 +22,8 @@ class Book(UserDict):
     def change_contact(self):
         name = Name(nameInput('name'))
         if str(name) not in self.data:
-            return f'Contact {str(name)} doesn`t exist in contacts'
-        phones = Phone(phoneInput('new phone (max 3) separated by space'))
+            return f'Contact {str(name)} does`t exist in contacts'
+        phones = Phone(phoneInput("new phone number's (max 3) separated by space"))
         email = Email(emailInput('email'))
         address = Address(addressInput('address'))
         birthday = Birthday(birthdayInput('birthday'))
@@ -34,14 +34,14 @@ class Book(UserDict):
     def remove_contact(self):
         name = Name(nameInput('name'))
         if str(name) not in self.data:
-            return f'Contact {str(name)} doesn`t exist in contacts'
+            return f'Contact {str(name)} does`t exist in contacts'
         self.data.pop(str(name))
         return f'Contact {str(name)} was removed from contacts!'
 
     def show_contact(self):
         name = Name(nameInput('name'))
         if str(name) not in self.data:
-            return f'Contact {str(name)} doesn`t exist in contacts'
+            return f'Contact {str(name)} does`t exist in contacts'
         record = self.data[str(name)]
         data = [[str(record.name), str(record.phones),
                 str(record.email), str(record.birthday), str(record.address)]]
@@ -71,17 +71,17 @@ class Book(UserDict):
     def add_phone(self):
         name = Name(nameInput('name'))
         if str(name) not in self.data:
-            return f'Contact {str(name)} doesn`t exist in contacts'
-        phone = Phone(phoneInput('new phone (max 3) separated by space'))
+            return f'Contact {str(name)} does`t exist in contacts'
+        phone = Phone(phoneInput('new phone number'))
         self.data[str(name)].phones.value.append(phone.value[0])
         return f'Phone {str(phone)} was added to contact {str(name)}'
 
     def change_phone(self):
         name = Name(nameInput('name'))
         if str(name) not in self.data:
-            return f'Contact {str(name)} doesn`t exist in contacts!'
-        old_phone = Phone(phoneInput('old phone'))
-        new_phone = Phone(phoneInput('new phone'))
+            return f'Contact {str(name)} does`t exist in contacts!'
+        old_phone = Phone(phoneInput('phone number which you want to change'))
+        new_phone = Phone(phoneInput('new phone number'))
         record = self.data[str(name)]
         change_flag = False
         for i, phone in enumerate(record.phones.value):
@@ -91,12 +91,12 @@ class Book(UserDict):
         if change_flag:
             return f'Phone {old_phone} was changed to {new_phone}!'
         else:
-            return f"Number {old_phone} doesn`t exist in contact '{name}'!"
+            return f"Number {old_phone} does`t exist in contact '{name}'!"
 
     def remove_phone(self):
         name = Name(nameInput('name'))
         if str(name) not in self.data:
-            return f'Contact {str(name)} doesn`t exist in contacts!'
+            return f'Contact {str(name)} does`t exist in contacts!'
         old_phone = Phone(phoneInput('phone for remove'))
         record = self.data[str(name)]
         change_flag = False
@@ -107,7 +107,7 @@ class Book(UserDict):
         if change_flag:
             return f'Phone {old_phone} was removed from contact {name}!'
         else:
-            return f"Number {old_phone} doesn`t exist in contact '{name}'!"
+            return f"Number {old_phone} does`t exist in contact '{name}'!"
 
 # email handling
     def add_email(self):
@@ -151,31 +151,25 @@ class Book(UserDict):
             return f'Contact "{name}" already has the birhtday!'
         return f'Contact "{name}" does not exist!'
 
-# func to calculate days number from today to the birtday
-    def days_to_bd(self):  # <-------------------------------------------------------NOT finished
-        today_day = datetime.now()
-        today_year = datetime.now().year
-        dif = today_day - self.birthday.value.replace(year=today_year)
-        if dif >= 0:
-            days_number = dif.days
-        else:
-            dif = self.birthday.value.replace(year=today_year+1) - today_day
-            days_number = dif.days
-        return days_number
-
-# func to show the list of birthdays which are in 'N' days from today
-    # <-------------------------------------------NOT finished
+# func to show the list of contact's with birthdays which are in 'N' days from today
     def show_birthdays_after(self):
-        days_number = daysnumberInput('days number to birthady')
+        if not self.data:
+            return f"Contact's data does't exist"
+        days_number = daysnumberInput()
+        check_day = datetime.now() + timedelta(days=days_number)
         contacts_list = []
         for name, record in self.data.items():
             if record.birthday:
-                if days_number == days_to_bd(record.birthday):
-                    contacts_list.append(record)
-        if contacts_list:
-            return f'Contacts in {days_number} days from today are: \n{contacts_list}'
-        else:
-            return f'No contacts with birthday after {days_number} days from today'
+                birthday = datetime.strptime(record.birthday.value, '%d.%m.%Y')
+                if birthday.day == check_day.day and birthday.month == check_day.month:
+                    contacts_list.append(name)
+        if not contacts_list:
+            return f"No contact's with birthday at {check_day.date()}"
+        data = [[str(i.name), str(i.phones),
+                 str(i.email), str(i.birthday), str(i.address)]
+                for k, i in self.data.items() if k in contacts_list]
+        headers = ['Name', 'Phones', 'Email', 'Birthday', 'Address']
+        show_in_console(data, headers)
 
 # address handling
     def add_address(self):
