@@ -22,7 +22,7 @@ class Book(UserDict):
     def change_contact(self):
         name = Name(nameInput('name'))
         if str(name) not in self.data:
-            return f'Contact {str(name)} does`t exist in contacts'
+            return f'Contact {str(name)} doesn`t exist in contacts'
         phones = Phone(phoneInput("new phone number's (max 3) separated by space"))
         email = Email(emailInput('email'))
         address = Address(addressInput('address'))
@@ -34,14 +34,14 @@ class Book(UserDict):
     def remove_contact(self):
         name = Name(nameInput('name'))
         if str(name) not in self.data:
-            return f'Contact {str(name)} does`t exist in contacts'
+            return f'Contact {str(name)} doesn`t exist in contacts'
         self.data.pop(str(name))
         return f'Contact {str(name)} was removed from contacts!'
 
     def show_contact(self):
         name = Name(nameInput('name'))
         if str(name) not in self.data:
-            return f'Contact {str(name)} does`t exist in contacts'
+            return f'Contact {str(name)} doesn`t exist in contacts'
         record = self.data[str(name)]
         data = [[str(record.name), str(record.phones),
                 str(record.email), str(record.birthday), str(record.address)]]
@@ -71,7 +71,7 @@ class Book(UserDict):
     def add_phone(self):
         name = Name(nameInput('name'))
         if str(name) not in self.data:
-            return f'Contact {str(name)} does`t exist in contacts'
+            return f'Contact {str(name)} doesn`t exist in contacts'
         phone = Phone(phoneInput('new phone number'))
         self.data[str(name)].phones.value.append(phone.value[0])
         return f'Phone {str(phone)} was added to contact {str(name)}'
@@ -79,7 +79,7 @@ class Book(UserDict):
     def change_phone(self):
         name = Name(nameInput('name'))
         if str(name) not in self.data:
-            return f'Contact {str(name)} does`t exist in contacts!'
+            return f'Contact {str(name)} doesn`t exist in contacts!'
         old_phone = Phone(phoneInput('phone number which you want to change'))
         new_phone = Phone(phoneInput('new phone number'))
         record = self.data[str(name)]
@@ -96,7 +96,7 @@ class Book(UserDict):
     def remove_phone(self):
         name = Name(nameInput('name'))
         if str(name) not in self.data:
-            return f'Contact {str(name)} does`t exist in contacts!'
+            return f'Contact {str(name)} doesn`t exist in contacts!'
         old_phone = Phone(phoneInput('phone for remove'))
         record = self.data[str(name)]
         change_flag = False

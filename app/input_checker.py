@@ -40,7 +40,7 @@ def birthdayInput(type_birthday='birthday'):
         birthday = input(f'Enter {type_birthday}: ')
         if check_birthday(birthday):
             return birthday
-        print('Wrong birhtday format. Please enter birthday in format: DD.MM.YYYY')
+        print('Wrong birthday format. Please enter birthday in format: DD.MM.YYYY')
 
 
 def addressInput(address=None):
@@ -85,7 +85,8 @@ def check_daysnumber(number):
 
 
 def check_phone(phone):
-    return phone.isdigit() and len(phone) < 13
+    return not bool([symbol for symbol in phone if not (symbol.isdigit() or symbol in ['+', '(', ')'])]) \
+           and len(phone) < 19
 
 
 # Notes functions
