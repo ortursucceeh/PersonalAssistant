@@ -1,7 +1,7 @@
 # Project-Personal_assistant
 
 <p align="center">
-      <img src="https://github.com/ortursucceeh/Project-Personal_assistant/blob/main/bot_logo.png" width="726">
+      <img src="https://github.com/ortursucceeh/Project-Personal_assistant/blob/main/images/bot_logo.png" width="900">
 </p>
 
 <p align="center">
