@@ -5,9 +5,74 @@ from Book import Book
 from Notes import Notes
 from constants import exit_words, hello_words
 from tabulate import tabulate
+from console_output import show_in_console
 
-contacts = Book()
-notes = Notes()
+
+def start_func():
+    global contacts
+    global notes
+    if os.path.exists("contact_book.pickle") and \
+            os.path.getsize("contact_book.pickle") != 0:
+        with open("contact_book.pickle", "rb") as file:
+            contacts = Book()
+            load_contacts = pickle.load(file)
+            for key, value in load_contacts.items():
+                contacts.data[key] = value
+    else:
+        contacts = Book()
+
+    if os.path.exists("notes.pickle") and \
+            os.path.getsize("notes.pickle") != 0:
+        with open("notes.pickle", "rb") as file:
+            notes = Notes()
+            load_notes = pickle.load(file)
+            for key, value in load_notes.items():
+                notes.data[key] = value
+    else:
+        notes = Notes()
+    return contacts, notes
+
+
+def exit_func():
+    with open('contact_book.pickle', 'wb') as file:
+        pickle.dump(contacts.data, file)
+    with open('notes.pickle', 'wb') as file:
+        pickle.dump(notes.data, file)
+    print("See you next time! All contacts and notes were saved locally.")
+    quit()
+
+
+start_func()
+
+
+def show_commands():
+
+    keysList = list(handler.keys())
+    contact_func = keysList[0:16]
+    notes_func = keysList[17:]
+    other_commands = ["show_commands", "sort_folder",
+                      "show_doc", "show_all_contacts", "show_all_notes"]
+    table_headers = ["Contacts Commands", "Notes Commands",
+                     "Exit Commands", "Hello Comands", "Other Commands"]
+    table = []
+    n = 0
+    for i in contact_func:
+        try:
+            table.append([i, notes_func[n], exit_words[n],
+                         hello_words[n], other_commands[n]])
+            n += 1
+        except IndexError:
+            try:
+                table.append([i, notes_func[n], " ", " ", other_commands[n]])
+                n += 1
+            except IndexError:
+                try:
+                    table.append([i, notes_func[n]])
+                    n += 1
+                except IndexError:
+                    table.append([i])
+    show_in_console(table, table_headers, "psql")
+
 
 handler = {
     'add_contact': contacts.add_contact,

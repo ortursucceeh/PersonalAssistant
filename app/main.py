@@ -1,4 +1,4 @@
-from functions import handler, user_mistake, exit_func, hello_func, show_commands
+from functions import handler, user_mistake, exit_func, hello_func, show_commands, start_func, exit_func
 from constants import hello_words, exit_words
 
 
@@ -6,7 +6,6 @@ def main():
     show_commands()
     while True:
         command = input("Enter command: ").lower().strip()
-
         if command in handler:
             answer = handler[command]()
             if answer:
