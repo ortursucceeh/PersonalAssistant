@@ -14,7 +14,7 @@ class Notes(UserDict):
             record = NoteRecord(title, keywords, notedata)
             self.data[str(title)] = record
             return f"Note '{title}' with keywords '{str(keywords)}' was added!"
-        return f"Note with title '{title}' is already in Notes"
+        return f"-!- Note with title '{title}' is already in Notes -!-"
 
     def change_note(self):
         title = Title(titleInput('note title which you want to change'))
@@ -26,20 +26,20 @@ class Notes(UserDict):
             del self.data[str(title)]
             self.data[str(new_title)] = new_record
             return f"Note '{title}' was changed to new note with title '{new_title}'!"
-        return f"Note with title '{title}' doesn't exist!"
+        return f"-!- Note with title '{title}' doesn't exist! -!-"
 
     def remove_note(self):
         title = Title(titleInput('note title which you want to remove'))
         if str(title) in self.data:
             del self.data[str(title)]
             return f"Note '{title}' was removed!"
-        return f"Note with title '{title}' doesn't exist!"
+        return f"-!- Note with title '{title}' doesn't exist! -!-"
 
     #output in console
     def show_note(self):
         title = Title(titleInput())
         if str(title) not in self.data:
-            return f"Note with title '{title}' doesn't exist!"
+            return f"-!- Note with title '{title}' doesn't exist! -!-"
         header = ['Title', 'Keywords', 'Data']
         data = [[self.data[str(title)].title,
                 self.data[str(title)].keywords,
@@ -88,7 +88,7 @@ class Notes(UserDict):
             self.data[str(new_title)] = old_record
             del self.data[str(title)]
             return f"Note title '{title}' was changed to new '{new_title}'!"
-        return f"Note with title '{title}' doesn't exist!"
+        return f"-!- Note with title '{title}' doesn't exist! -!-"
 
     # keywords handling
     def add_keywords(self):
@@ -103,8 +103,8 @@ class Notes(UserDict):
                 self.data[str(title)].keywords = self.data[str(
                     title)].keywords + keywords
                 return f"New keywords {keywords} was added to {title}!"
-            return f'Note {title} already has maximum count of keywords!'
-        return f"Note with title '{title}' doesn't exist!"
+            return f'-!- Note {title} already has maximum count of keywords! -!-'
+        return f"-!- Note with title '{title}' doesn't exist! -!-"
 
     def change_keywords(self):
         title = Title(titleInput(
@@ -113,7 +113,7 @@ class Notes(UserDict):
             new_keywords = Keywords(keywordsInput('one new keyword'))
             self.data[str(title)].keywords = new_keywords
             return f"Note {title} keywards was changed to {str(new_keywords)}"
-        return f"Note with title '{title}' doesn't exist!"
+        return f"-!- Note with title '{title}' doesn't exist! -!-"
 
     def remove_keywords(self):
         title = Title(titleInput(
@@ -130,8 +130,8 @@ class Notes(UserDict):
                 new_notedata = notedataInput('note data')
                 self.data[str(title)].notedata = new_notedata
                 return f"Note data was added to note '{title}'!"
-            return f"Note {title} has note data! You can change it by entering change_notedata."
-        return f"Note with title '{title}' doesn't exist!"
+            return f"-!- Note {title} has note data! -!-\nYou can change it by entering change_notedata."
+        return f"-!- Note with title '{title}' doesn't exist! -!-"
 
     def change_notedata(self):
         title = Title(titleInput(
@@ -141,8 +141,8 @@ class Notes(UserDict):
                 new_notedata = notedataInput('new note data')
                 self.data[str(title)].notedata = new_notedata
                 return f"Note data was changed!"
-            return f"Note {title} has no note data! You can add it by entering add_notedata."
-        return f"Note with title '{title}' doesn't exist!"
+            return f"-!- Note {title} has no note data! -!-\nYou can add it by entering add_notedata."
+        return f"-!- Note with title '{title}' doesn't exist! -!-"
 
     def remove_notedata(self):
         title = Title(titleInput(
@@ -151,8 +151,8 @@ class Notes(UserDict):
             if self.data[str(title)].notedata:
                 self.data[str(title)].notedata = None
                 return f"Note data was removed!"
-            return f"Note {title} has no note data."
-        return f"Note with title '{title}' doesn't exist!"
+            return f"-!- Note {title} has no note data. -!-"
+        return f"-!- Note with title '{title}' doesn't exist! -!-"
 
 
 class NoteRecord:
