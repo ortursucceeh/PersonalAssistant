@@ -11,7 +11,7 @@ class Book(UserDict):
         name = Name(nameInput('name'))
         if str(name) in self.data:
             return f'-!- Contact {str(name)} is already in contacts! -!-'
-        phones = Phone(phoneInput("phone numbers (max 3) separated by space"))
+        phones = Phones(phoneInput("phone numbers (max 3) separated by space"))
         email = Email(emailInput('email'))
         birthday = Birthday(birthdayInput('birthday'))
         address = Address(addressInput('address'))
@@ -23,7 +23,7 @@ class Book(UserDict):
         name = Name(nameInput('name'))
         if str(name) not in self.data:
             return f'-!- Contact {str(name)} doesn`t exist in contacts! -!-'
-        phones = Phone(phoneInput(
+        phones = Phones(phoneInput(
             "new phone numbers (max 3) separated by space"))
         email = Email(emailInput('email'))
         birthday = Birthday(birthdayInput('birthday'))
@@ -70,22 +70,24 @@ class Book(UserDict):
 
 # phone handling
     def add_phone(self):
-        name = Name(nameInput('name'))
+        name = Name(nameInput('contact`s name for which you want add phones'))
         if str(name) not in self.data:
             return f'-!- Contact {str(name)} doesn`t exist in contacts! -!-'
-        if len(self.data[str(name)].phones.value) > 2:
-            return f"You can't add phone number. Max phone number's - 3. You can change or remove number"
-        phone = Phone(phoneInput('new phone number'))
-        self.data[str(name)].phones.value.append(phone.value[0])
-        return f'Phone {str(phone)} was added to contact {str(name)}'
-
+        len_phones = len(self.data[str(name)].phone)
+        if len_phones < 3:
+            phones = Phones(phoneInput(
+                f'new phones numbers (max {3 - len_phones})'))
+        if len(phones) > 3 - len_phones:
+            return "-!- Too much phones in input! -!-"
+        self.data[str(name)].phones = self.data[str(name)].phones + phones
+        return f'New phones were added to contact {str(name)}'
 
     def change_phone(self):
         name = Name(nameInput('name'))
         if str(name) not in self.data:
             return f'-!- Contact {str(name)} doesn`t exist in contacts! -!-'
-        old_phone = Phone(phoneInput('phone number which you want to change'))
-        new_phone = Phone(phoneInput('new phone number'))
+        old_phone = Phones(phoneInput('phone number which you want to change'))
+        new_phone = Phones(phoneInput('new phone number'))
         record = self.data[str(name)]
         change_flag = False
         for i, phone in enumerate(record.phones.value):
@@ -101,7 +103,7 @@ class Book(UserDict):
         name = Name(nameInput('name'))
         if str(name) not in self.data:
             return f'-!- Contact {str(name)} doesn`t exist in contacts! -!-'
-        old_phone = Phone(phoneInput('phone for remove'))
+        old_phone = Phones(phoneInput('phone for remove'))
         record = self.data[str(name)]
         change_flag = False
         for phone in record.phones.value:
@@ -235,9 +237,15 @@ class Name(ContactField):
         return self.value.capitalize()
 
 
-class Phone(ContactField):
+class Phones(ContactField):
     def __str__(self):
         return ', '.join(self.value) if self.value else "-"
+
+    def __len__(self):
+        return len(self.value)
+
+    def __add__(self, other):
+        return __class__(self.value + other)
 
 
 class Email(ContactField):
