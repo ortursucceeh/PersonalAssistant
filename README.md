@@ -21,27 +21,38 @@ Also there is separate feature which provide the sorting the folder specified by
 
 ## Documentation
 
-Command Line Bot
+Command Line Bot 
 
 > Specification or bot features
 
-1. Contact Book Save contacts to contact book with names, addresses, phone numbers, email and
-   birthday Add multiple phone numbers to one contact Delete or change phone numbers, email, address
-   Search contacts by the name or phone part Show a list of contacts whose birthday is due the
-   specified number of days from the current date. Check the correctness of the entered phone
-   number, email and birthday Edit and delete contacts
+1. Contact Book
+It is possible to make the following operations:
+* Save contacts to contact book with names, addresses, phone numbers, email and birthday
+* Add any quantity of phone numbers to one contact.  
+* Delete or change phone numbers, email, address 
+* Search contacts by the name or phone part 
+* Show a list of contacts whose birthday is due the specified number of days from the current date.
+* Check the correctness of the entered phone number, email and birthday
+* Edit and delete contacts
 
-2. Notepad Save notes with text information (unrelated to the contacts) Search edit and delete notes
-   Add keywords (tags) to the notes Search and sort notes by keywords (tags)
+2. Notepad
+Notepad have no relation or connection with contacts in the contact book.
+It is possible to:
+* Save notes with text information (up to 120 characters). 
+* Search, edit and delete notes
+* Add keywords (tags) to the notes (not more than 3 items)
+* Search and sort notes by keywords (tags)
 
-3. File sorter Sort files in the specified folder by category (images, documents, videos, etc.).
+3. File sorter
+User can use this feature to sort files in the specified folder on a computer by category (images, documents, videos, etc.).
 
-> The bot can prompt commands to the user on incorrect input
+> The bot can prompt commands to the user on incorrect input. The bot suggests in such situation up to three commands similar to that one user input. User can choose one of them.
 
-> To start bot: file "bot.py"
+4. How to run bot
 
-> To save contacts and notes correctly, you need to stop the program only using the built-in
-> commands (see the table hereinafter with description). All info will be saved automatically.
+> To run the bot use file “main.py” 
+
+> To save contacts and notes correctly, you need to stop the program only using the built-in commands (see the table here in after with description). All information will be saved automatically.
 
 ## Distribute
 
