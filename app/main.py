@@ -24,7 +24,7 @@ def main():
                     print(answer)
             else:
                 print(
-                    "Unknown command. Try another one\nTo see all commands enter 'show_commands'")
+                    "-!- Unknown command! -!-\nTry another one!\nTo see all commands enter 'show_commands'")
 
 
 if __name__ == '__main__':

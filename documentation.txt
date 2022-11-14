@@ -1,0 +1,83 @@
+Command Line Bot (CLB)
+
+CLB uses a command line interface. It is a text based interface. The CLB understand only certain commands. 
+The list of all commands is provided in the full description. The LCB helps to work with contacts and notes. 
+There is possibility to store and change text notes and contacts info (phones, address, email). 
+Also there is separate feature which provide the sorting the folder specified by users.
+
+
+---------------------
+Documentation
+
+Command Line Bot 
+
+> Specification or bot features
+
+1. Contact Book
+It is possible to make the following operations:
+* Save contacts to contact book with names, addresses, phone numbers, email and birthday
+* Add any quantity of phone numbers to one contact.  
+* Delete or change phone numbers, email, address 
+* Search contacts by the name or phone part 
+* Show a list of contacts whose birthday is due the specified number of days from the current date.
+* Check the correctness of the entered phone number, email and birthday
+* Edit and delete contacts
+
+2. Notepad
+Notepad have no relation or connection with contacts in the contact book.
+It is possible to:
+* Save notes with text information (up to 120 characters). 
+* Search, edit and delete notes
+* Add keywords (tags) to the notes (not more than 3 items)
+* Search and sort notes by keywords (tags)
+
+3. File sorter
+User can use this feature to sort files in the specified folder on a computer by category (images, documents, videos, etc.).
+
+> The bot can prompt commands to the user on incorrect input. The bot suggests in such situation up to three commands similar to that one user input. User can choose one of them.
+
+4. How to install and use
+
+> To run the bot use file “main.py” 
+
+> To save contacts and notes correctly, you need to stop the program only using the built-in commands (see the table here in after with description). All information will be saved automatically.
+
+-------------------------------
+Commands description
+
+add_contact >> add new contact to the phone book
+change_contact >> change old contact by new one
+remove_contact >> delete contact and all its info
+show_contact >> find contact by part of the string (letters or numbers)
+show_all_contacts >> show all contacts with information in table view
+change_name >> change name of the contact
+add_phone >> add new phone number to the contact
+change_phone >> change one of the phones in the list if so
+remove_phone >> delete one of the phones in the list if so
+add_email >> add email to the contact
+change_email >> change old email by new one
+remove_email >> delete email
+add_birthday >> add birthday to the contact
+show_birthdays_after >> show the list of contacts with birthday date in given number of days
+add_address >> add address as string to the contact
+change_address >> change old address by new one
+remove_address >> delete address
+add_note >> add note to the notes (not to the contact!)
+change_note >> change old note by new one
+remove_note >> delete note
+show_note >> find note by part of the string
+show_all_notes >> show all contacts with information in table view
+sort_notes_by >> sort notes in of the possible ways: by title, by keywords(tags), alphabetically by notes
+show_notes_with_tag >> show all notes by keyword (tag) specified
+change_title >> change title of the note
+add_keywords >> add keywords to the note
+change_keywords >> change keyword from the list
+remove_keywords >> delete one of the keywords from the list
+add_notedata >> add new text info to the note
+change_notedata >> change text info in the note
+remove_notedata >> delete text data from the note
+close, bye, quit, exit >> any of these commands can be used to exit the bot
+hi, hello, privet >> any of these commands can be used to greet the bot
+show_commands >> show in command line the list commands available
+show_doc >> print the bot manual 
+filter_folder >> start the sorting files in the folder specified by user
