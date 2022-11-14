@@ -3,7 +3,6 @@ from constants import hello_words, exit_words
 
 
 def main():
-    show_commands()
     while True:
         command = input("Enter command: ").lower().strip()
         if command in handler:
