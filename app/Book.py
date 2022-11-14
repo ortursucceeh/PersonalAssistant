@@ -73,9 +73,12 @@ class Book(UserDict):
         name = Name(nameInput('name'))
         if str(name) not in self.data:
             return f'Contact {str(name)} doesn`t exist in contacts!'
+        if len(self.data[str(name)].phones.value) > 2:
+            return f"You can't add phone number. Max phone number's - 3. You can change or remove number"
         phone = Phone(phoneInput('new phone number'))
         self.data[str(name)].phones.value.append(phone.value[0])
         return f'Phone {str(phone)} was added to contact {str(name)}'
+
 
     def change_phone(self):
         name = Name(nameInput('name'))
