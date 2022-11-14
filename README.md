@@ -12,7 +12,12 @@
 
 ## About
 
-About Text Here
+Command Line Bot (CLB)
+
+CLB uses a command line interface. It is a text based interface. The CLB understand only certain commands. 
+The list of all commands is provided in the full description. The LCB helps to work with contacts and notes. 
+There is possibility to store and change text notes and contacts info (phones, address, email). 
+Also there is separate feature which provide the sorting the folder specified by users.
 
 ## Documentation
 
