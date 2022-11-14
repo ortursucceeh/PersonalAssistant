@@ -41,7 +41,7 @@ def birthdayInput(type_birthday='birthday'):
         birthday = input(f'Enter {type_birthday}: ')
         if check_birthday(birthday) or birthday == "":
             return birthday
-        print('Wrong birhtday format. Please enter birthday in format: DD.MM.YYYY')
+        print('Wrong birthday format. Please enter birthday in format: DD.MM.YYYY')
 
 
 def addressInput(address=None):
@@ -59,8 +59,6 @@ def daysnumberInput():
     print('Wrong format. Please enter number.')
 
 # Notes functions
-
-
 def titleInput(title_type='title'):
     while True:
         title = input(f'Enter {title_type}: ')
@@ -105,8 +103,6 @@ def categoryInput():
         print("Wrong digit!")
 
 # input checkers
-
-
 def check_name(name):
     return bool(name)
 
@@ -133,10 +129,10 @@ def check_daysnumber(number):
 
 
 def check_phone(phone):
-    return phone.isdigit() and len(phone) < 13
+    return not bool([symbol for symbol in phone if not (symbol.isdigit() or symbol in ['+', '(', ')'])]) \
+           and len(phone) < 19
 
 # notes input check
-
 
 def check_title(title):
     return bool(title)
