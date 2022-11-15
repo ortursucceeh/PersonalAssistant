@@ -9,46 +9,49 @@ class Book(UserDict):
     # work with contact
     def add_contact(self):
         name = Name(name_input('name'))
-        if str(name) in self.data:
-            return f'-!- Contact {str(name)} is already in contacts! -!-'
-        phones = Phones(phone_input(
-            "phone numbers (max 3) separated by space"))
-        email = Email(email_input('email'))
-        birthday = Birthday(birthday_input('birthday'))
-        address = Address(address_input('address'))
-        record = ContactRecord(name, phones, email, birthday, address)
-        self.data[str(name)] = record
-        return f'Contact {str(name)} was added to contacts!'
+        if str(name) not in self.data:
+            phones = Phones(phone_input("phone numbers (max 3) separated by space"))
+            email = Email(email_input('email'))
+            birthday = Birthday(birthday_input('birthday'))
+            address = Address(address_input('address'))
+            record = ContactRecord(name, phones, email, birthday, address)
+            self.data[str(name)] = record
+            return f'Contact {str(name)} was added to contacts!'
+        return f'-!- Contact {str(name)} is already in contacts! -!-'
 
     def change_contact(self):
         name = Name(name_input('name'))
-        if str(name) not in self.data:
-            return f'-!- Contact {str(name)} doesn`t exist in contacts! -!-'
-        phones = Phones(phone_input(
-            "new phone numbers (max 3) separated by space"))
-        email = Email(email_input('email'))
-        birthday = Birthday(birthday_input('birthday'))
-        address = Address(address_input('address'))
-        record = ContactRecord(name, phones, email, birthday, address)
-        self.data[str(name)] = record
-        return f'Contact {str(name)} was changed in contacts!'
+        if str(name) in self.data:
+            phones = Phones(phone_input("new phone numbers (max 3) separated by space"))
+            email = Email(email_input('new email'))
+            birthday = Birthday(birthday_input('new birthday'))
+            address = Address(address_input('new address'))
+            record = ContactRecord(name, phones, email, birthday, address)
+            self.data[str(name)] = record
+            return f'Contact {str(name)} was changed in contacts!'
+        return f'-!- Contact {str(name)} doesn`t exist in contacts! -!-'
 
     def remove_contact(self):
         name = Name(name_input('name'))
-        if str(name) not in self.data:
-            return f'-!- Contact {str(name)} doesn`t exist in contacts! -!-'
-        self.data.pop(str(name))
-        return f'Contact {str(name)} was removed from contacts!'
+        if str(name) in self.data:
+            self.data.pop(str(name))
+            return f'Contact {str(name)} was removed from contacts!'
+        return f'-!- Contact {str(name)} doesn`t exist in contacts! -!-'
 
     def show_contact(self):
-        name = Name(name_input('name'))
-        if str(name) not in self.data:
-            return f'-!- Contact {str(name)} doesn`t exist in contacts! -!-'
-        record = self.data[str(name)]
-        data = [[str(record.name), str(record.phones),
-                str(record.email), str(record.birthday), str(record.address)]]
-        headers = ['Name', 'Phones', 'Email', 'Birthday', 'Address']
-        show_in_console(data, headers, 'rounded_outline')
+        search_data = name_input('search data')
+        data = [[str(i.name), str(i.phones),
+                 str(i.email), str(i.birthday), str(i.address)]
+                for k, i in self.data.items() if
+                search_data in str(i.name).lower()
+                or search_data in str(i.phones).lower()
+                or search_data in str(i.email).lower()
+                or search_data in str(i.address).lower()]
+        if data:
+            headers = ['Name', 'Phones', 'Email', 'Birthday', 'Address']
+            show_in_console(data, headers, 'rounded_outline')
+        else:
+            return f"-!- No contacts with data {search_data} -!-"
 
     def show_all(self):
         data = [[str(i.name), str(i.phones),
@@ -61,7 +64,7 @@ class Book(UserDict):
     def change_name(self):
         name = Name(name_input('name which you want to change'))
         if str(name) in self.data:
-            new_name = Name(name_input('new name'))
+            new_name = Name(nameInput('new name'))
             old_record = self.data[str(name)]
             self.data[str(new_name)] = old_record
             old_record.name = new_name
@@ -69,54 +72,45 @@ class Book(UserDict):
             return f"Contact {str(name)} name was changed to new '{new_name}'!"
         return f'-!- Contact {str(name)} doesn`t exist in contacts! -!-'
 
-# phone handling
+    # phone handling
     def add_phone(self):
-        name = Name(name_input('contact`s name for which you want add phones'))
-        if str(name) not in self.data:
-            return f'-!- Contact {str(name)} doesn`t exist in contacts! -!-'
-        len_phones = len(self.data[str(name)].phone)
-        if len_phones < 3:
-            phones = Phones(phone_input(
-                f'new phones numbers (max {3 - len_phones})'))
-        if len(phones) > 3 - len_phones:
+        name = Name(name_input('contacts name for which you want add phones'))
+        if str(name) in self.data:
+            len_phones = len(self.data[str(name)].phones)
+            if len_phones < 3:
+                phones = Phones(phone_input(f'new phones numbers (max {3 - len_phones})'))
+                if len(phones) <= 3 - len_phones:
+                    self.data[str(name)].phones = self.data[str(name)].phones + phones.value
+                    return f'New phones were added to contact {str(name)}'
+                return f'You input more than {3 - len_phones}. Try again'
             return "-!- Too much phones in input! -!-"
-        self.data[str(name)].phones = self.data[str(name)].phones + phones
-        return f'New phones were added to contact {str(name)}'
+        return f'-!- Contact {str(name)} doesn`t exist in contacts! -!-'
 
     def change_phone(self):
         name = Name(name_input('name'))
-        if str(name) not in self.data:
-            return f'-!- Contact {str(name)} doesn`t exist in contacts! -!-'
-        old_phone = Phones(phone_input(
-            'phone number which you want to change'))
-        new_phone = Phones(phone_input('new phone number'))
-        record = self.data[str(name)]
-        change_flag = False
-        for i, phone in enumerate(record.phones.value):
-            if phone == old_phone.value[0]:
-                record.phones.value[i] = new_phone.value[0]
-                change_flag = True
-        if change_flag:
-            return f'Phone {old_phone} was changed to {new_phone}!'
-        else:
-            return f"-!- Number {old_phone} doesn`t exist in contact '{name}'! -!-"
+        if str(name) in self.data:
+            old_phone = Phones(phone_input('phone number which you want to change'))
+            new_phone = Phones(phone_input('new phone number'))
+            record = self.data[str(name)]
+            if old_phone.value[0] in record.phones.value:
+                record.phones.value.insert(record.phones.value.index(old_phone.value[0]), new_phone.value[0])
+                record.phones.value.remove(old_phone.value[0])
+                return f'Phone {old_phone} was changed to {new_phone}!'
+            return f"-!- Number {old_phone} doesn`t exist in contact '{name}' -!-"
+        return f'-!- Contact {str(name)} doesn`t exist in contacts! -!-'
 
     def remove_phone(self):
         name = Name(name_input('name'))
-        if str(name) not in self.data:
-            return f'-!- Contact {str(name)} doesn`t exist in contacts! -!-'
-        old_phone = Phones(phone_input('phone for remove'))
-        record = self.data[str(name)]
-        change_flag = False
-        for phone in record.phones.value:
-            if phone == str(old_phone.value[0]):
-                record.phones.value.remove(phone)
-                change_flag = True
-        if change_flag:
-            return f'Phone {old_phone} was removed from contact {name}!'
-        return f"-!- Number {old_phone} doesn`t exist in contact '{name}'! -!-"
+        if str(name) in self.data:
+            old_phone = Phones(phone_input('phone number for remove'))
+            record = self.data[str(name)]
+            if old_phone.value[0] in record.phones.value:
+                record.phones.value.remove(old_phone.value[0])
+                return f'Phone {old_phone} was removed from contact {name}'
+            return f"-!- Number {old_phone} doesn`t exist in contact '{name}' -!-"
+        return f'-!- Contact {str(name)} doesn`t exist in contacts! -!-'
 
-# email handling
+    # email handling
     def add_email(self):
         name = Name(name_input('the name for which you want to add email'))
         if str(name) in self.data:
@@ -160,25 +154,22 @@ class Book(UserDict):
 
 # func to show the list of contact's with birthdays which are in 'N' days from today
     def show_birthdays_after(self):
-        if not self.data:
-            return f"-!- Contact's data doesn`t exist -!-"
-        days_number = daysnumber_input()
-        check_day = datetime.now() + timedelta(days=days_number)
-        contacts_list = []
-        for name, record in self.data.items():
-            if record.birthday:
-                birthday = datetime.strptime(record.birthday.value, '%d.%m.%Y')
-                if birthday.day == check_day.day and birthday.month == check_day.month:
-                    contacts_list.append(name)
-        if not contacts_list:
-            return f"-!- No contacts with birthday on {check_day.date()} -!-"
-        data = [[str(i.name), str(i.phones),
-                 str(i.email), str(i.birthday), str(i.address)]
-                for k, i in self.data.items() if k in contacts_list]
-        headers = ['Name', 'Phones', 'Email', 'Birthday', 'Address']
-        show_in_console(data, headers)
+        if self.data:
+            days_number = daysnumber_input()
+            check_day = datetime.now() + timedelta(days=days_number)
+            data = [[str(i.name), str(i.phones),
+                     str(i.email), str(i.birthday), str(i.address)]
+                    for k, i in self.data.items() if i.birthday
+                    and datetime.strptime(i.birthday.value, '%d.%m.%Y').day == check_day.day
+                    and datetime.strptime(i.birthday.value, '%d.%m.%Y').month == check_day.month]
+            if data:
+                headers = ['Name', 'Phones', 'Email', 'Birthday', 'Address']
+                show_in_console(data, headers, 'rounded_outline')
+            else:
+                return f"-!- No contacts with birthday on {check_day.date()} -!-"
+        return f"-!- Contacts data doesn`t exist -!-"
 
-# address handling
+    # address handling
     def add_address(self):
         name = Name(name_input('the name for which you want to add address'))
         if str(name) in self.data:
