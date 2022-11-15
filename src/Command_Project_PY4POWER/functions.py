@@ -9,6 +9,9 @@ from constants import exit_words, hello_words
 from console_output import show_in_console
 from string import punctuation as punct
 from constants import TRANS, EXTENSIONS, IGNORE_FOLDERS
+current_directory = os.getcwd()
+saving_folder = os.path.join(
+    current_directory, "saved_data")
 
 
 def user_mistake(command):
@@ -29,9 +32,10 @@ def user_mistake(command):
 def start_func():
     global contacts
     global notes
-    if os.path.exists(r"app\saved_data\contact_book.pickle") and \
-            os.path.getsize(r"app\saved_data\contact_book.pickle"):
-        with open(r"app\saved_data\contact_book.pickle", "rb") as file:
+
+    if os.path.exists(os.path.join(saving_folder, "contact_book.pickle")) and \
+            os.path.getsize(os.path.join(saving_folder, "contact_book.pickle")):
+        with open(os.path.join(saving_folder, "contact_book.pickle"), "rb") as file:
             contacts = Book()
             load_contacts = pickle.load(file)
             for key, value in load_contacts.items():
@@ -39,9 +43,9 @@ def start_func():
     else:
         contacts = Book()
 
-    if os.path.exists(r"app\saved_data\notes.pickle") and \
-            os.path.getsize(r"app\saved_data\notes.pickle") != 0:
-        with open(r"app\saved_data\notes.pickle", "rb") as file:
+    if os.path.exists(os.path.join(saving_folder, "notes.pickle")) and \
+            os.path.getsize(os.path.join(saving_folder, "notes.pickle")) != 0:
+        with open(os.path.join(saving_folder, "notes.pickle"), "rb") as file:
             notes = Notes()
             load_notes = pickle.load(file)
             for key, value in load_notes.items():
@@ -52,9 +56,11 @@ def start_func():
 
 
 def exit_func():
-    with open(r'app\saved_data\contact_book.pickle', 'wb') as file:
+    if not os.path.exists(saving_folder):
+        os.makedirs(saving_folder)
+    with open(os.path.join(saving_folder, "contact_book.pickle"), 'wb') as file:
         pickle.dump(contacts.data, file)
-    with open(r'app\saved_data\notes.pickle', 'wb') as file:
+    with open(os.path.join(saving_folder, "notes.pickle"), 'wb') as file:
         pickle.dump(notes.data, file)
     print("See you next time! All contacts and notes were saved locally.")
     quit()
