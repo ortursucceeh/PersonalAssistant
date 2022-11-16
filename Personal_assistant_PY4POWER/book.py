@@ -9,8 +9,8 @@ class Book(UserDict):
     def add_contact(self, name, phones, email, birthday, address):
         name = Name(name)
         if str(name) not in self.data:
-            record = ContactRecord(name, Phones(phones),
-                                   Email(email), Birthday(birthday), Address(address))
+            record = ContactRecord(name, Phones(phones), Email(email),
+                                   Birthday(birthday), Address(address))
             self.data[str(name)] = record
             return f'[+] Contact {str(name)} was added to contacts!'
         return f'-!- Contact {str(name)} is already in contacts! -!-'
@@ -18,7 +18,7 @@ class Book(UserDict):
     def change_contact(self, old_name, new_name, phones, email, birthday, address):
         name = Name(old_name)
         if str(name) in self.data:
-            record = ContactRecord(name, Phones(phones), Email(
+            record = ContactRecord(Name(new_name), Phones(phones), Email(
                 email), Birthday(birthday), Address(address))
             self.data[str(name)] = record
             return f'[+] Contact {str(name)} was changed in contacts!'

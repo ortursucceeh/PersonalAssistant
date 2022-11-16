@@ -12,7 +12,7 @@ from constants import TRANS, EXTENSIONS, IGNORE_FOLDERS
 from input_checker import *
 
 
-current_directory = os.getcwd()
+current_directory = os.path.dirname(os.path.realpath(__file__))
 saving_folder = os.path.join(current_directory, "saved_data")
 
 
@@ -76,8 +76,12 @@ def exit_func():
         pickle.dump(contacts.data, file)
     with open(os.path.join(saving_folder, "notes.pickle"), 'wb') as file:
         pickle.dump(notes.data, file)
+
     print('*' * 61)
-    print("See you next time! All contacts and notes were saved locally.")
+    
+    print(
+        f"Yours contacts and notes were saved in such directory:\n{saving_folder}")
+    print("See you next time!")
     print('*' * 61)
     quit()
 
@@ -206,7 +210,7 @@ handler = {
                     'birthday', 'address')),
     'change_contact': (contacts.change_contact, (name_input, name_input, phones_input,
                                                  email_input, birthday_input, address_input),
-                       ('name', 'new phone numbers (max 3) separated by space', 'new email', 'new birthday', 'new address')),
+                       ('contact`s name to change', 'new name', 'new phone numbers (max 3) separated by space', 'new email', 'new birthday', 'new address')),
     'remove_contact': (contacts.remove_contact, (name_input,), ('name',)),
     'show_contact': (contacts.show_contact, (name_input,), ('name',)),
     'show_all_contacts': (contacts.show_all,),

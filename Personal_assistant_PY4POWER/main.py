@@ -1,6 +1,10 @@
+import sys
+import os
+folder = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(folder)
 from constants import exit_words, hello_words
-from functions import (exit_func, handler, hello_func,
-                       show_commands, user_mistake)
+from functions import handler, exit_func, hello_func, user_mistake
+
 
 
 def main():
@@ -38,4 +42,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    exit(main())

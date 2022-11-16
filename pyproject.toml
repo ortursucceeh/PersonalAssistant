@@ -2,9 +2,12 @@
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
+[tool.setuptools.packages]
+find = {}
+
 [project]
-name = "Command_Project_PY4POWER"
-version = "0.0.3"
+name = "Personal_assistant_PY4POWER"
+version = "0.0.1"
 authors = [
   { name="ortursucceeh", email="author@example.com" },
   { name="Yuriy Krasyuk", email="author@example.com" },
@@ -14,6 +17,7 @@ authors = [
 description = "Store and change text notes and contacts info (phones, address, email)."
 readme = "README.md"
 requires-python = ">=3.7"
+dependencies = ["tabulate"]
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
@@ -23,3 +27,6 @@ classifiers = [
 [project.urls]
 "Homepage" = "https://github.com/ortursucceeh/Project-Personal_assistantt"
 "Bug Tracker" = "https://github.com/ortursucceeh/Project-Personal_assistant/issues"
+
+[project.scripts]
+pybot = "Personal_assistant_PY4POWER.main:main"
