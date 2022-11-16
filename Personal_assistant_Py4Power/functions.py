@@ -9,7 +9,7 @@ from constants import exit_words, hello_words
 from console_output import show_in_console
 from string import punctuation as punct
 from constants import TRANS, EXTENSIONS, IGNORE_FOLDERS
-current_directory = os.getcwd()
+current_directory = os.path.dirname(os.path.realpath(__file__))
 saving_folder = os.path.join(
     current_directory, "saved_data")
 
@@ -62,6 +62,8 @@ def exit_func():
         pickle.dump(contacts.data, file)
     with open(os.path.join(saving_folder, "notes.pickle"), 'wb') as file:
         pickle.dump(notes.data, file)
+    print("Yours contacts and notes were saved in such directory:")
+    print(saving_folder)
     print("See you next time! All contacts and notes were saved locally.")
     quit()
 
