@@ -59,7 +59,9 @@ User can use this feature to sort files in the specified folder on a computer by
 - [Service Name](Page Link)
 
 ## Developers
-
+<p align="center">
+      <img src="https://github.com/ortursucceeh/Project-Personal_assistant/blob/main/images/py4power_logo.jpg" width="300">
+</p>
 - [ortursucceeh](https://github.com/ortursucceeh) [Yuriy Krasyuk](https://github.com/YuriyKrasyuk)
 - [Serhii-Kravchenko-2022](https://github.com/Serhii-Kravchenko-2022) [SergiiOshmarin](https://github.com/SergiiOshmarin)
 
