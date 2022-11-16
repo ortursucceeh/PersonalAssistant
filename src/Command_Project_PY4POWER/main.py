@@ -1,12 +1,19 @@
-from functions import handler, user_mistake, exit_func, hello_func, show_commands, exit_func
-from constants import hello_words, exit_words
+from constants import exit_words, hello_words
+from functions import (exit_func, handler, hello_func,
+                       show_commands, user_mistake)
 
 
 def main():
+    hello_func()
+
     while True:
-        command = input("Enter command: ").lower().strip()
+        command = input(">>> Enter command: ").lower().strip()
         if command in handler:
-            answer = handler[command]()
+            data = handler[command]
+            func = data[0]
+            args = data[1] if len(data) > 1 else ()
+            info = data[2] if len(data) > 2 else ()
+            answer = func(*(f(descr) for f, descr in zip(args, info)))
             if answer:
                 print(answer)
             else:
@@ -18,12 +25,16 @@ def main():
         else:
             second_try = user_mistake(command)
             if second_try:
-                answer = handler[second_try]()
+                data = handler[second_try]
+                func = data[0]
+                args = data[1] if len(data) > 1 else ()
+                info = data[2] if len(data) > 2 else ()
+                answer = func(*(f(descr) for f, descr in zip(args, info)))
                 if answer:
                     print(answer)
             else:
                 print(
-                    "-!- Unknown command! -!-\nTry another one!\nTo see all commands enter 'show_commands'")
+                    "-!- Unknown command! -!-\nTo see all commands enter 'show_commands'")
 
 
 if __name__ == '__main__':

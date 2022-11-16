@@ -1,73 +1,66 @@
 from collections import UserDict
-from input_checker import title_input, keywords_input, notedata_input, tags_input, category_input
 from console_output import show_in_console
 
 
 class Notes(UserDict):
 
     # note handling
-    def add_note(self):
-        title = Title(title_input())
+    def add_note(self, title, keywords, notedata):
+        title = Title(title)
         if str(title) not in self.data:
-            keywords = Keywords(keywords_input())
-            notedata = Notedata(notedata_input())
-            record = NoteRecord(title, keywords, notedata)
+            record = NoteRecord(title,
+                                Keywords(keywords),
+                                Notedata(notedata))
             self.data[str(title)] = record
-            return f"Note '{title}' with keywords '{str(keywords)}' was added!"
+            return f"[+] Note '{title}' with keywords '{str(keywords)}' was added!"
         return f"-!- Note with title '{title}' is already in Notes -!-"
 
-    def change_note(self):
-        title = Title(title_input('note title which you want to change'))
-        if str(title) in self.data:
-            new_title = Title(title_input('new title'))
-            new_keywords = Keywords(keywords_input('new keywords'))
-            new_notedata = Notedata(notedata_input('new note data'))
-            new_record = NoteRecord(new_title, new_keywords, new_notedata)
-            del self.data[str(title)]
+    def change_note(self, old_title, new_title, new_keywords, new_notedata):
+        old_title = Title(old_title)
+        if str(old_title) in self.data:
+            new_record = NoteRecord(
+                Title(new_title), Keywords(new_keywords), Notedata(new_notedata))
+            del self.data[str(old_title)]
             self.data[str(new_title)] = new_record
-            return f"Note '{title}' was changed to new note with title '{new_title}'!"
-        return f"-!- Note with title '{title}' doesn't exist! -!-"
+            return f"[+] Note '{old_title}' was changed to new note with title '{new_title}'!"
+        return f"-!- Note with title '{old_title}' doesn't exist! -!-"
 
-    def remove_note(self):
-        title = Title(title_input('note title which you want to remove'))
+    def remove_note(self, title):
+        title = Title(title)
         if str(title) in self.data:
             del self.data[str(title)]
-            return f"Note '{title}' was removed!"
+            return f"[+] Note '{title}' was removed!"
         return f"-!- Note with title '{title}' doesn't exist! -!-"
 
     #output in console
-    def show_note(self):
-        title = Title(title_input())
+    def show_note(self, title):
+        title = Title(title)
         if str(title) not in self.data:
             return f"-!- Note with title '{title}' doesn't exist! -!-"
-        header = ['Title', 'Keywords', 'Data']
-        data = [[self.data[str(title)].title,
+        header = ('Title', 'Keywords', 'Data')
+        data = ((self.data[str(title)].title,
                 self.data[str(title)].keywords,
-                self.data[str(title)].notedata]]
+                self.data[str(title)].notedata),)
         show_in_console(data, header)
 
     def show_all(self):
-
         data = [[str(i.title), str(i.keywords), str(i.notedata)]
                 for i in self.data.values()]
-        header = ['Title', 'Keywords', 'Data']
+        header = ('Title', 'Keywords', 'Data')
         show_in_console(data, header)
 
-    def show_notes_with_tag(self):
-        data = []
-        header = ['Title', 'Keywords', 'Data']
-        tag = tags_input()
-        for record in self.data.values():
-            if tag in str(record.keywords):
-                data.append([
-                    str(record.title),
-                    str(record.keywords),
-                    str(record.notedata)])
-        show_in_console(data, header)
+    def show_notes_with_tag(self, tag):
+        data = [[str(rec.title), str(rec.keywords), str(rec.notedata)]
+                for rec in self.data.values()
+                if tag in str(rec.keywords)]
+        header = ('Title', 'Keywords', 'Data')
+        if data:
+            show_in_console(data, header)
+        else:
+            return f'You have no notes with tag "{tag}"'
 
     # sort_func
-    def sort_notes_by(self):
-        category = category_input()
+    def sort_notes_by(self, category):
         if category == '1':
             def key(x): return str(x[1].title)
         elif category == '2':
@@ -75,87 +68,74 @@ class Notes(UserDict):
         else:
             def key(x): return str(x[1].notedata)
         self.data = dict(sorted(self.data.items(), key=key))
-        return "Notes were sorted!"
+        return "[+] Notes were sorted!"
 
-        # title handling
-
-    def change_title(self):
-        title = Title(title_input('note title which you want to change'))
-        if str(title) in self.data:
-            new_title = Title(title_input('new note title'))
-            old_record = self.data[str(title)]
-            old_record.title = new_title
+    # title handling
+    def change_title(self, old_title, new_title):
+        old_title = Title(old_title)
+        if str(old_title) in self.data:
+            old_record = self.data[str(old_title)]
+            old_record.title = Title(new_title)
             self.data[str(new_title)] = old_record
-            del self.data[str(title)]
-            return f"Note title '{title}' was changed to new '{new_title}'!"
-        return f"-!- Note with title '{title}' doesn't exist! -!-"
+            del self.data[str(old_title)]
+            return f"[+] Note title '{old_title}' was changed to new '{new_title}'!"
+        return f"-!- Note with title '{old_title}' doesn't exist! -!-"
 
     # keywords handling
-    def add_keywords(self):
-        title = Title(title_input(
-            'note title for which you want to add keywords'))
+    def add_keywords(self, title, keywords):
+        title = Title(title)
         if str(title) in self.data:
             len_kwords = len(self.data[str(title)].keywords)
             if len_kwords < 3:
-                keywords = keywords_input(
-                    f'new keywords(max {3 - len_kwords})')
                 if len(keywords) > 3 - len_kwords:
-                    return 'Too much keywords!'
+                    return '-!- Too much keywords! -!-'
                 self.data[str(title)].keywords = self.data[str(
                     title)].keywords + keywords
-                return f"New keywords {keywords} were added to {title}!"
+                return f"[+] New keywords {keywords} were added to {title}!"
             return f'-!- Note {title} already has maximum count of keywords! -!-'
         return f"-!- Note with title '{title}' doesn't exist! -!-"
 
-    def change_keywords(self):
-        title = Title(title_input(
-            'note title for which you want to change keywords'))
+    def change_keywords(self, title, new_keywords):
+        title = Title(title)
         if str(title) in self.data:
-            len_kwords = len(self.data[str(title)].keywords)
-            if len_kwords < 3:
-                new_keywords = keywords_input(f'new keywords(max 3)')
-                if len(new_keywords) > 3:
-                    return 'Too much keywords!'
-                self.data[str(title)].keywords = new_keywords
-            return f"Note {title} keywards was changed to {str(new_keywords)}"
+            if len(new_keywords) > 3:
+                return '-!- Too much keywords! -!-'
+            self.data[str(title)].keywords = Keywords(new_keywords)
+            return f"[+] Note {title} keywords was changed to {str(new_keywords)}"
         return f"-!- Note with title '{title}' doesn't exist! -!-"
 
-    def remove_keywords(self):
-        title = Title(title_input(
-            'note title for which you want to remove keywords'))
+    def remove_keywords(self, title):
+        title = Title(title)
         if str(title) in self.data:
-            self.data[str(title)].value = []
+            self.data[str(title)].keywords = Keywords([])
+            return '[+] Keywords were removed!'
+        return f'You have do not have note with this title'
 
     # notedata handling
-    def add_notedata(self):
-        title = Title(title_input(
-            'note title for which you want to add note data'))
+    def add_notedata(self, title, new_notedata):
+        title = Title(title)
         if str(title) in self.data:
             if not self.data[str(title)].notedata:
-                new_notedata = notedata_input('note data')
-                self.data[str(title)].notedata = new_notedata
-                return f"Note data was added to note '{title}'!"
+                self.data[str(title)].notedata = Notedata(new_notedata)
+                return f"[+] Note data was added to note '{title}'!"
             return f"-!- Note {title} has note data! -!-\nYou can change it by entering change_notedata."
         return f"-!- Note with title '{title}' doesn't exist! -!-"
 
-    def change_notedata(self):
-        title = Title(title_input(
-            'note title for which you want to change note data'))
+    def change_notedata(self, title, new_notedata):
+        title = Title(title)
         if str(title) in self.data:
             if self.data[str(title)].notedata:
-                new_notedata = notedata_input('new note data')
-                self.data[str(title)].notedata = new_notedata
-                return f"Note data was changed!"
+                self.data[str(title)].notedata = Notedata(new_notedata)
+                return f"[+] Note data was changed!"
             return f"-!- Note {title} has no note data! -!-\nYou can add it by entering add_notedata."
         return f"-!- Note with title '{title}' doesn't exist! -!-"
 
-    def remove_notedata(self):
-        title = Title(title_input(
-            'note title for which you want to change note data'))
+    def remove_notedata(self, title):
+        title = Title(title)
         if str(title) in self.data:
             if self.data[str(title)].notedata:
-                self.data[str(title)].notedata = None
-                return f"Note data was removed!"
+                self.data[str(title)].notedata = Notedata(None)
+                return f"[+] Note data was removed!"
             return f"-!- Note {title} has no note data. -!-"
         return f"-!- Note with title '{title}' doesn't exist! -!-"
 

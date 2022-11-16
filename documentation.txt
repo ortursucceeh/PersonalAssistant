@@ -1,13 +1,15 @@
+-----------------------
+Short description
+
 Command Line Bot (CLB)
 
-CLB uses a command line interface. It is a text based interface. The CLB understand only certain commands. 
+CLB uses a command line interface. It is a text-based interface. The CLB understand only certain commands. 
 The list of all commands is provided in the full description. The LCB helps to work with contacts and notes. 
 There is possibility to store and change text notes and contacts info (phones, address, email). 
 Also there is separate feature which provide the sorting the folder specified by users.
 
 
 ---------------------
-Documentation
 
 Command Line Bot 
 
@@ -16,23 +18,23 @@ Command Line Bot
 1. Contact Book
 It is possible to make the following operations:
 * Save contacts to contact book with names, addresses, phone numbers, email and birthday
-* Add any quantity of phone numbers to one contact.  
+* Add any quantity of phone numbers to one contact
 * Delete or change phone numbers, email, address 
 * Search contacts by the name or phone part 
-* Show a list of contacts whose birthday is due the specified number of days from the current date.
+* Show a list of contacts whose birthday is due the specified number of days from the current date
 * Check the correctness of the entered phone number, email and birthday
 * Edit and delete contacts
 
 2. Notepad
 Notepad have no relation or connection with contacts in the contact book.
 It is possible to:
-* Save notes with text information (up to 120 characters). 
+* Save notes with text information (up to 120 characters)
 * Search, edit and delete notes
 * Add keywords (tags) to the notes (not more than 3 items)
 * Search and sort notes by keywords (tags)
 
 3. File sorter
-User can use this feature to sort files in the specified folder on a computer by category (images, documents, videos, etc.).
+User can use this feature to sort files in the specified folder on a computer by category (images, documents, videos, etc.)
 
 > The bot can prompt commands to the user on incorrect input. The bot suggests in such situation up to three commands similar to that one user input. User can choose one of them.
 
@@ -40,7 +42,7 @@ User can use this feature to sort files in the specified folder on a computer by
 
 > To run the bot use file “main.py” 
 
-> To save contacts and notes correctly, you need to stop the program only using the built-in commands (see the table here in after with description). All information will be saved automatically.
+> To save contacts and notes correctly, you need to stop the program only using the built-in commands (see the table hereinafter with description). All information will be saved automatically.
 
 -------------------------------
 Commands description
@@ -70,9 +72,9 @@ show_all_notes >> show all contacts with information in table view
 sort_notes_by >> sort notes in of the possible ways: by title, by keywords(tags), alphabetically by notes
 show_notes_with_tag >> show all notes by keyword (tag) specified
 change_title >> change title of the note
-add_keywords >> add keywords to the note
-change_keywords >> change keyword from the list
-remove_keywords >> delete one of the keywords from the list
+add_keyword >> add keywords to the note
+change_keyword >> change keyword from the list
+remove_keyword >> delete one of the keywords from the list
 add_notedata >> add new text info to the note
 change_notedata >> change text info in the note
 remove_notedata >> delete text data from the note
