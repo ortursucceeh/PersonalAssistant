@@ -1,7 +1,7 @@
 # Project-Personal_assistant
 
 <p align="center">
-      <img src="https://github.com/ortursucceeh/Project-Personal_assistant/blob/main/images/bot_logo.png" width="900">
+      <img src="https://github.com/ortursucceeh/Project-Personal_assistant/blob/main/PY4POWER_Logo_and_documentation/bot_logo.png" width="900">
 </p>
 
 <p align="center">
@@ -60,7 +60,7 @@ User can use this feature to sort files in the specified folder on a computer by
 
 ## Developers
 <p align="center">
-      <img src="https://github.com/ortursucceeh/Project-Personal_assistant/blob/main/images/py4power_logo.jpg" width="300">
+      <img src="https://github.com/ortursucceeh/Project-Personal_assistant/blob/main/PY4POWER_Logo_and_documentation/py4power_logo.jpg" width="250">
 </p>
 - [ortursucceeh](https://github.com/ortursucceeh) [Yuriy Krasyuk](https://github.com/YuriyKrasyuk)
 - [Serhii-Kravchenko-2022](https://github.com/Serhii-Kravchenko-2022) [SergiiOshmarin](https://github.com/SergiiOshmarin)
