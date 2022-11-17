@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 find = {}
 
 [project]
-name = "Personal_assistant_PY4POWER"
+name = "CLBOT_PY4POWER"
 version = "0.0.1"
 authors = [
   { name="ortursucceeh", email="author@example.com" },
@@ -29,4 +29,4 @@ classifiers = [
 "Bug Tracker" = "https://github.com/ortursucceeh/Project-Personal_assistant/issues"
 
 [project.scripts]
-pybot = "Personal_assistant_PY4POWER.main:main"
+pybot = "CLBOT_PY4POWER.main:main"
