@@ -12,7 +12,7 @@ class Notes(UserDict):
                                 Keywords(keywords),
                                 Notedata(notedata))
             self.data[str(title)] = record
-            return f"[+] Note '{title}' with keywords '{str(keywords)}' was added!"
+            return f"[+] Note '{title}' with keywords '{keywords}' was added!"
         return f"-!- Note with title '{title}' is already in Notes -!-"
 
     def change_note(self, old_title, new_title, new_keywords, new_notedata):

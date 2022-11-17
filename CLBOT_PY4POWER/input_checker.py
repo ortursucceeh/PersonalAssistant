@@ -72,10 +72,10 @@ def title_input(title_type='title'):
 def keywords_input(kwords_type='keywords'):
     while True:
         keywords = input(
-            f'>>> Enter {kwords_type}(max 3) separated by space: ')
+            f'>>> Enter {kwords_type} separated by space: ')
         if check_keywords(keywords):
             return keywords.split()
-        print("-!- Wrong keywords format! -!-")
+        print("-!- Wrong keywords input! -!-")
 
 
 def notedata_input(notedata_type='note data'):
