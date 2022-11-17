@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 find = {}
 
 [project]
-name = "PY4POWER_AnotherOne"
+name = "Personal_assistant_PY4POWER"
 version = "0.0.1"
 authors = [
   { name="ortursucceeh", email="author@example.com" },
