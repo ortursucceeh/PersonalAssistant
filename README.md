@@ -56,7 +56,7 @@ User can use this feature to sort files in the specified folder on a computer by
 
 ## Distribute
 
-- [testpypi](pip install -i https://test.pypi.org/simple/ CLBOT-PY4POWER==0.0.2)
+- [testpypi]https://test.pypi.org/project/CLBOT-PY4POWER/0.0.2/
 
 ## Developers
 <p align="center">
