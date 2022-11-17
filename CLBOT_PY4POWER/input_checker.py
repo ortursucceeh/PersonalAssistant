@@ -73,7 +73,7 @@ def keywords_input(kwords_type='keywords'):
     while True:
         keywords = input(
             f'>>> Enter {kwords_type} separated by space: ')
-        if check_keywords(keywords):
+        if check_keywords(keywords) or not keywords:
             return keywords.split()
         print("-!- Wrong keywords input! -!-")
 
@@ -81,7 +81,7 @@ def keywords_input(kwords_type='keywords'):
 def notedata_input(notedata_type='note data'):
     while True:
         notedata = input(f'>>> Enter {notedata_type}(max 120 chars): ')
-        if check_notedata(notedata):
+        if check_notedata(notedata) or not notedata:
             return notedata
         print(
             "-!- Wrong notedata format! -!-\n\

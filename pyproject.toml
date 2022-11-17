@@ -7,7 +7,7 @@ find = {}
 
 [project]
 name = "CLBOT_PY4POWER"
-version = "0.0.1"
+version = "0.0.2"
 authors = [
   { name="ortursucceeh", email="author@example.com" },
   { name="Yuriy Krasyuk", email="author@example.com" },
