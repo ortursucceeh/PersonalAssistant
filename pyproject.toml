@@ -16,7 +16,7 @@ authors = [
 ]
 description = "Store and change text notes and contacts info (phones, address, email)."
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.6"
 dependencies = ["tabulate"]
 classifiers = [
     "Programming Language :: Python :: 3",
