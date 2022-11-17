@@ -73,9 +73,10 @@ class Notes(UserDict):
     # title handling
     def change_title(self, old_title, new_title):
         old_title = Title(old_title)
+        new_title = Title(new_title)
         if str(old_title) in self.data:
             old_record = self.data[str(old_title)]
-            old_record.title = Title(new_title)
+            old_record.title = new_title
             self.data[str(new_title)] = old_record
             del self.data[str(old_title)]
             return f"[+] Note title '{old_title}' was changed to new '{new_title}'!"

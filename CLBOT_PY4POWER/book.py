@@ -55,9 +55,10 @@ class Book(UserDict):
     # name handling
     def change_name(self, old_name, new_name):
         name = Name(old_name)
+        new_name = Name(name)
         if str(name) in self.data:
             old_record = self.data[str(name)]
-            old_record.name = Name(new_name)
+            old_record.name = new_name
             self.data[str(new_name)] = old_record
             del self.data[str(name)]
             return f"[+] Contact {str(name)} name was changed to new '{new_name}'!"
