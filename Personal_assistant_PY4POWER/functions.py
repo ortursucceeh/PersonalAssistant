@@ -14,7 +14,7 @@ from input_checker import *
 
 current_directory = os.path.dirname(os.path.realpath(__file__))
 saving_folder = os.path.join(current_directory, "saved_data")
-
+document=os.path.join(os.path.dirname(current_directory),"PY4POWER_Logo_and_documentation","documentation.txt")
 
 def hello_func():
     print('''Hello! I am your personal assistant CLBOT. How can I help you?
@@ -118,7 +118,7 @@ def show_commands():
 
 
 def show_doc():
-    with open('documentation.txt', 'r', encoding='utf-8') as file:
+    with open(document, 'r', encoding='utf-8') as file:
         data = file.readlines()
         print('\n\n\n')
         print(''.join(data))
