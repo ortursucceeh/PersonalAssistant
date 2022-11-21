@@ -21,7 +21,7 @@ class Book(UserDict):
             record = ContactRecord(Name(new_name), Phones(phones), Email(
                 email), Birthday(birthday), Address(address))
             self.data[str(name)] = record
-            return f'[+] Contact {str(name)} was changed in contacts!'
+            return f'[+] Contact {str(name)} was changed!'
         return f'-!- Contact {str(name)} doesn`t exist in contacts! -!-'
 
     def remove_contact(self, name):
@@ -54,15 +54,15 @@ class Book(UserDict):
 
     # name handling
     def change_name(self, old_name, new_name):
-        name = Name(old_name)
-        new_name = Name(name)
-        if str(name) in self.data:
-            old_record = self.data[str(name)]
+        old_name = Name(old_name)
+        new_name = Name(new_name)
+        if str(old_name) in self.data:
+            old_record = self.data[str(old_name)]
             old_record.name = new_name
             self.data[str(new_name)] = old_record
-            del self.data[str(name)]
-            return f"[+] Contact {str(name)} name was changed to new '{new_name}'!"
-        return f'-!- Contact {str(name)} doesn`t exist in contacts! -!-'
+            del self.data[str(old_name)]
+            return f"[+] Contact {str(old_name)} name was changed to new '{new_name}'!"
+        return f'-!- Contact {str(old_name)} doesn`t exist in contacts! -!-'
 
     # phone handling
     def add_phone(self, name, phones):

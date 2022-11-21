@@ -20,7 +20,7 @@ def hello_func():
     print('''Hello! I am your personal assistant CLBOT. How can I help you?
 I can handle your contacts and notes. 
 I can filter files by categories in any folder on your computer too. 
-Would you like to look over my full documentation? Then enter the command “show_doc”.''')
+Would you like to look over my full documentation? Then enter the command "show_doc".''')
 
 
 def start_func():
@@ -58,15 +58,18 @@ def user_mistake(command):
         choices = ['1', '2', '3', '']
         print("-!- Looks like you made a mistake! -!-")
         for i in range(len(posssibilty)):
-            print(f"\tType '{choices[i]}' if you mean '{posssibilty[i]}'")
+            print(f"\tEnter [{choices[i]}] if you mean '{posssibilty[i]}'")
         print("\tOr do not enter anything to skip.")
         new_input = input(">>> Enter digit: ").strip()
         while new_input not in choices:
+            if not new_input:
+                return None
             new_input = input(
-                ">>> Enter one of the digits above to choose function").strip()
-        if not new_input:
-            return None
-        return posssibilty[choices.index(new_input)]
+                ">>> Enter one of the digits above to choose function: ").strip()
+        try:
+            return posssibilty[choices.index(new_input)]
+        except IndexError:
+            print('-!- Wrong digit! -!-')
 
 
 def exit_func():

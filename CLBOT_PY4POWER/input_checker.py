@@ -22,7 +22,7 @@ def phones_input(type_name='phone'):
         for data in phone.split():
             if not check_phone(data):
                 print(
-                    f'-!- Phone number {data} must contain no more than 12 digits! -!-')
+                    f'-!- Wrong phone number format - "{data}" -!-')
                 check_flag = False
         if check_flag:
             return phone.split()
@@ -33,7 +33,7 @@ def email_input(type_email='email'):
         email = input(f'>>> Enter {type_email}: ')
         if check_email(email) or not email:
             return email
-        print('-!- Wrong email format! -!-\nPlease enter correct email.')
+        print('-!- Wrong email format! -!-\nPlease enter correct email in format like "example@goit.ua".')
 
 
 def birthday_input(type_birthday='birthday'):
@@ -87,10 +87,6 @@ def notedata_input(notedata_type='note data'):
             "-!- Wrong notedata format! -!-\n\
                 Data length must be between [1:120] characters!")
 
-
-ttl_kwrds_dt_inputs = (title_input, keywords_input, notedata_input)
-
-
 def tag_input(tag='tag'):
     while True:
         tags = input(f">>> Enter {tag}: ")
@@ -99,7 +95,7 @@ def tag_input(tag='tag'):
 
 def category_input(*args):
     while True:
-        print("\t1: Title;\n\t2: Keywords;\n\t3: Note data;")
+        print("\t[1]: Title\n\t[2]: Keywords\n\t[3]: Note data")
         category = input(
             f">>> Select the digit of the category that you want to sort by: ")
         if category in '123':
@@ -127,7 +123,7 @@ def check_birthday(birthday):
     try:
         birthday = datetime.strptime(birthday, '%d.%m.%Y')
         return True
-    except NameError:
+    except ValueError:
         return False
 
 
