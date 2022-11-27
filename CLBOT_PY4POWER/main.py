@@ -9,7 +9,6 @@ from functions import handler, exit_func, hello_func, user_mistake
 
 def main():
     hello_func()
-
     while True:
         command = input(">>> Enter command: ").lower().strip()
         if command in handler:
