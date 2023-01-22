@@ -1,4 +1,4 @@
-# Project-Personal_assistant
+# Project "Personal assistant"
 
 <p align="center">
       <img src="https://github.com/ortursucceeh/Project-Personal_assistant/blob/main/PY4POWER_Logo_and_documentation/bot_logo.png" width="900">
