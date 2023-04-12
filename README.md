@@ -62,8 +62,10 @@ User can use this feature to sort files in the specified folder on a computer by
 <p align="center">
       <img src="https://github.com/ortursucceeh/Project-Personal_assistant/blob/main/PY4POWER_Logo_and_documentation/py4power_logo.jpg" width="250">
 </p>
-- [ortursucceeh](https://github.com/ortursucceeh) [Yuriy Krasyuk](https://github.com/YuriyKrasyuk)
-- [Serhii-Kravchenko-2022](https://github.com/Serhii-Kravchenko-2022) [SergiiOshmarin](https://github.com/SergiiOshmarin)
+- [ortursucceeh](https://github.com/ortursucceeh)
+- [Yuriy Krasyuk](https://github.com/YuriyKrasyuk)
+- [Serhii-Kravchenko-2022](https://github.com/Serhii-Kravchenko-2022)
+- [SergiiOshmarin](https://github.com/SergiiOshmarin)
 
 ## License
 Project Project-Personal_assistant is distributed under the MIT license.
