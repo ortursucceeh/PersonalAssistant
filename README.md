@@ -55,17 +55,20 @@ User can use this feature to sort files in the specified folder on a computer by
 > To save contacts and notes correctly, you need to stop the program only using the built-in commands (see the table here in after with description). All information will be saved automatically.
 
 ## Distribute
+- <a href="https://test.pypi.org/project/CLBOT-PY4POWER/0.0.4/">testpypi</a><br>
 
-- [testpypi]https://test.pypi.org/project/CLBOT-PY4POWER/0.0.4/
 
 ## Developers
 <p align="center">
       <img src="https://github.com/ortursucceeh/Project-Personal_assistant/blob/main/PY4POWER_Logo_and_documentation/py4power_logo.jpg" width="250">
 </p>
-- [ortursucceeh](https://github.com/ortursucceeh)<br>
-- [Yuriy Krasyuk](https://github.com/YuriyKrasyuk)<br>
-- [Serhii-Kravchenko-2022](https://github.com/Serhii-Kravchenko-2022)<br>
-- [SergiiOshmarin](https://github.com/SergiiOshmarin)<br>
+<div align="center">
+  <a href="https://github.com/ortursucceeh">ortursucceeh</a><br>
+  <a href="https://github.com/YuriyKrasyuk">Yuriy Krasyuk</a><br>
+  <a href="https://github.com/Serhii-Kravchenko-2022">Serhii-Kravchenko-2022</a><br>
+  <a href="https://github.com/SergiiOshmarin">SergiiOshmarin</a><br>
+</div>
+
 
 ## License
 Project Project-Personal_assistant is distributed under the MIT license.
